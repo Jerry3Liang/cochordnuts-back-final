@@ -1,6 +1,6 @@
 //引入 SFC 元件
-// import orderBack from '@/components/orderBack.vue';
-// import orderDetailBack from '@/components/orderDetailBack.vue';
+import orderBack from '@/views/Order/orderBack.vue';
+import orderDetailBack from '@/views/Order/orderDetailBack.vue';
 
 //設定 orderRoutes 網址:
 export default [
