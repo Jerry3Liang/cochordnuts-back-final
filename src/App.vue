@@ -1,6 +1,9 @@
 <template>
-  <NavigationBar></NavigationBar>
-  <RouterView></RouterView>
+  <div style="width: 20%; float: left;">
+    <NavigationBar></NavigationBar>
+  </div>
+  <div style="width: 80%; float: right; margin-top: 8%;">
+  <RouterView></RouterView></div>
 </template>
 
 <script setup>
