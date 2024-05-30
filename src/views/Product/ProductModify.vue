@@ -82,12 +82,15 @@
 <script setup>
     const path = import.meta.env.VITE_PHOTO_URL;
     import { ref, onMounted } from 'vue';
-    import { useRoute } from 'vue-router';
+    import { useRoute, useRouter } from 'vue-router';
     
     import axios from '@/plugins/axios.js';
+    import Swal from 'sweetalert2';
+
     
 
     const route = useRoute();
+    const router = useRouter();
     const id = ref(route.query.id);
     const imagePreviewUrl = ref("");
     const byteArray = ref(null);
@@ -199,11 +202,23 @@
             "describe" : product.value.describe,
             "productStatus" : statusSelected.value,
         }
-        console.log(data);
+        // console.log(data);
 
         axios.put(`/products/modify/${id.value}`,data).then(function(response){
-            console.log(response.data);
+            console.log("response=",response.data);
+            Swal.fire({
+            icon: "success",
+            title: "已加入購物車",
+            showConfirmButton: true,
+            confirmButtonText: "確認",
+            }).then(function(result){
+                if(result.isConfirmed){
+                    router.push({path: "/products/list"});
+                } 
+            })
+
         }).catch(function(error){
+            console.log("error=",error.data);
 
         })
 
@@ -313,18 +328,7 @@
 
     }
 
-    // function checkForm(){
-
-    //     let data = {
-
-    //     }
-
-        // axios.patch(`/products/modify/${id}`).then(function(response){
-
-        // }).catch(function(error){
-
-        // })
-    // }
+    
 
 </script>
     

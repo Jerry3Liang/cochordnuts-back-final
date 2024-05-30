@@ -41,7 +41,8 @@
 <script setup>
     const path = import.meta.env.VITE_PHOTO_URL;
     import { ref, onMounted } from 'vue';
-    import { useRoute } from 'vue-router';
+    import { useRoute, useRouter } from 'vue-router';
+    import Swal from 'sweetalert2';
     import axios from '@/plugins/axios';
     import ShoppingGuide from '@/components/ShoppingGuide.vue';
     const props = defineProps(["productObj"]);
@@ -49,18 +50,45 @@
     // const pro = ref(props.productObj.productNo);
 
     const route = useRoute();
+    const router = useRouter();
+
     const id = ref(route.query.id);
     
     function callDelete(){
         console.log(id);
+        Swal.fire({
+            title: "確認刪除?",
+            text: "是否刪除此產品",
+            icon: "warning",
+            showConfirmButton: true,
+            confirmButtonText: "確認刪除",
+            showCancelButton: true,
+            cancelButtonText: "返回頁面",
+            }).then(function(result){
+                if(result.isConfirmed){
+                axios.delete(`/products/remove/${id.value}`).then(function(response){
+                    console.log(response.data);
+                    
+                    Swal.fire({
+                    title: "刪除成功",
+                    text: "已刪除該商品",
+                    icon: "success",
+                    showConfirmButton: true,
+                    confirmButtonText: "確認",
+                    }).then(function(){
+                        router.push({path: "/products/list"}); 
+                    })
+                }).catch(function(error){
+                    console.log(error.data);
+        
+                })
+                    
+                } else {
+                    
+                };
 
-        axios.delete(`/products/remove/${id.value}`).then(function(response){
-            console.log(response.data);
+            });
 
-        }).catch(function(error){
-            console.log(error.data);
-
-        })
     }
     
 </script>
