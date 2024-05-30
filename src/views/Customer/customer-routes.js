@@ -1,9 +1,9 @@
 //引入 SFC 元件
-// import CustomerAnswer from './CustomerAnswer.vue';
-// import CustomerCase from './CustomerCase.vue';
-// import CaseDetail from './CaseDetail.vue';
-// import UpdateContent from './UpdateContent.vue';
-// import FinishCaseDetail from "./FinishCaseDetail.vue";
+import CustomerAnswer from './CustomerAnswer.vue';
+import CustomerCase from './CustomerCase.vue';
+import CaseDetail from './CaseDetail.vue';
+import UpdateContent from './UpdateContent.vue';
+import FinishCaseDetail from "./FinishCaseDetail.vue";
 
 //設定 orderRoutes 網址:
 export default [
