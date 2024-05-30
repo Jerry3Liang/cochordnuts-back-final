@@ -1,7 +1,7 @@
 <template>
     <h3>音樂類型編輯</h3>
     <input type="text" v-model="styleType">
-    <button @click="typeAdd">新增</button>
+    <button @click="typeAdd" style="margin: 1%" class="btn btn-light">新增</button>
     <h3 style="font-weight: bold;">音樂類型</h3>
     <select multiple size="6" class="col-5">
         <option v-for="atype in types" :key="atype.styleNo" :value="atype.styleNo">{{ atype.styleType }}</option>

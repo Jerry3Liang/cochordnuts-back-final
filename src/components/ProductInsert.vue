@@ -11,15 +11,15 @@
     <div class="card" style="padding: 5%; width: 60%; float: right" >
         <div class="input-group mb-3 col-4">
             <span class="input-group-text" id="basic-addon1">商品名稱</span>
-            <input type="text" v-model="productName" class="form-control" placeholder="請輸入產品名稱" aria-label="Username" aria-describedby="basic-addon1">
+            <input type="text" v-model="productName" class="form-control" placeholder="請輸入產品名稱(必填)" aria-label="Username" aria-describedby="basic-addon1">
         </div>
         <div class="input-group mb-3">
-            <span class="input-group-text">NT.</span>
-            <input type="text" v-model="unitPrice" class="form-control" aria-label="Amount (to the nearest dollar)">
+            <span class="input-group-text">原價</span>
+            <input type="text" v-model="unitPrice" placeholder="請輸入商品價格(必填)" class="form-control" aria-label="Amount (to the nearest dollar)">
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">庫存數量</span>
-            <input type="number" v-model="stock" class="form-control" placeholder="請輸入商品庫存數量" aria-label="Username" aria-describedby="basic-addon1">
+            <input type="number" v-model="stock" class="form-control" placeholder="請輸入商品庫存數量(必填)" aria-label="Username" aria-describedby="basic-addon1">
         </div>
 
         <div class="form-check">
@@ -37,7 +37,7 @@
                 <span v-show="showDisErr == 1" style="color: red;">請輸入商品折數</span>
                 <span v-show="showDisErr == 2" style="color: red;">請輸入正確的商品折數</span>
             </div>
-            <div class="col-5" v-if="!discount">
+            <div class="col-6" v-if="!discount">
                 <div class="input-group mb-3" >
                     <span class="input-group-text" id="basic-addon1">折數</span>
                     <input type="text" class="form-control" placeholder="請先勾選為折扣商品" aria-label="Username" aria-describedby="basic-addon1" disabled>
@@ -49,34 +49,34 @@
             <label class="form-check-label" for="flexCheckDefault">預購商品</label>
         </div>
 
-        <div class="input-group mb-3" >
+        <div class="input-group mb-3">
             <span>發行日期：</span>
             <input class="input-group-text" v-model="date" type="date" placeholder="Select Date"></input>
         </div>
 
         <div class="col-4" v-if="artist">
-            <p>歌唱者/藝人：</p>
+            <p>歌唱者/藝人(必填)：</p>
             <select class="form-select" @change="checkSelected('artist')" id="artistSelect">
                 <option selected hidden>請選擇藝人</option>
                 <option v-for="anart in artist" :key="anart.artistNo" :value="anart.artistNo">{{ anart.artistName }}</option>
             </select>
         </div>
         <div>
-            <p>商品類型：</p>
+            <p>商品類型(必填)：</p>
             <select class="form-select" @change="checkSelected('type')" id="typeSelect">
                 <option selected hidden>請選擇商品類型</option>
                 <option v-for="atype in musicType" :key="atype.styleNo" :value="atype.styleNo"> {{ atype.styleType }}</option>
             </select>
         </div>
         <div>
-            <p>語言：</p>
+            <p>語言(必填)：</p>
             <select class="form-select" @change="checkSelected('language')" id="languageSelect">
                 <option selected hidden>請選擇語言</option>
                 <option v-for="lan in languages" :key="lan.languageNo" :value="lan.languageNo">{{ lan.languageType }}</option>
             </select>
         </div>
         <div>
-            <p>音樂年份：</p>
+            <p>音樂年份(必填)：</p>
             <select class="form-select" @change="checkSelected('year')" id="yearSelect">
                 <option selected hidden>請選擇音樂年份</option>
                 <option v-for="year in years" :key="year.musicYearNo" :value="year.musicYearNo">{{ year.generation }}</option>
@@ -85,7 +85,7 @@
 
         <div>
             <div>
-                <span>商品描述</span>
+                <span>商品描述(必填)：</span>
                 <textarea class="form-control" aria-label="With textarea" v-model="describe" style="width: 100%; height: 200px; resize: none; white-space: pre-wrap;"></textarea>
             </div>
         </div>
@@ -96,114 +96,14 @@
     </div>
 
 
-<!-- 
-<div class="container" style="background-color: #e3e3e3;">
-<div class="row" style="margin-top: 2%; justify-content: flex-start; background-color: gray;">
-    <div class="col-4">
-        <input type="file" @change="handleFileUpload">
-        <div v-if="imagePreviewUrl">
-            <img :src="imagePreviewUrl" style="max-width: 300px; max-height: 300px;">
-        </div>
-    </div>
-</div>     
-<div class="row justify-content-md-cente" style="background-color: antiquewhite;">
-    <div class="col-4" style="margin: auto;">
-    <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1">商品名稱</span>
-        <input type="text" v-model="productName" class="form-control" placeholder="請輸入產品名稱" aria-label="Username" aria-describedby="basic-addon1">
-    </div>
-    <div class="input-group mb-3">
-        <span class="input-group-text">NT.</span>
-        <input type="text" v-model="unitPrice" class="form-control" aria-label="Amount (to the nearest dollar)">
-    </div>
-    <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1">庫存數量</span>
-        <input type="number" v-model="stock" class="form-control" placeholder="請輸入商品庫存數量" aria-label="Username" aria-describedby="basic-addon1">
-    </div>
-    </div>
-</div>
-
-<div>
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" :value="isBest" id="flexCheckDefault" @change="show('bestChange')">
-        <label class="form-check-label" for="flexCheckDefault">暢銷商品</label>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" :value="discount" id="flexCheckDefault" v-model="discount" @change="checkDis">
-        <label class="form-check-label" for="flexCheckDefault">折扣商品</label>
-        <div class="col-3" v-if="discount">
-            <div class="input-group mb-3" >
-                <span class="input-group-text" id="basic-addon1">折數</span>
-                <input type="text" v-model="prodiscount" class="form-control" placeholder="請輸入產品折數" aria-label="Username" aria-describedby="basic-addon1" @blur="checkDis">
-                <span v-show="showDisErr == 1" style="color: red;">請輸入商品折數</span>
-                <span v-show="showDisErr == 2" style="color: red;">請輸入正確的商品折數</span>
-            </div>
-        </div>
-        <div class="col-3" v-if="!discount">
-            <div class="input-group mb-3" >
-                <span class="input-group-text" id="basic-addon1">折數</span>
-                <input type="text" class="form-control" placeholder="請先勾選為折扣商品" aria-label="Username" aria-describedby="basic-addon1" disabled>
-            </div>
-        </div>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" :value="isPreOrder" id="flexCheckDefault" @change="show('preOrder')">
-        <label class="form-check-label" for="flexCheckDefault">預購商品</label>
-    </div>
-</div>
-
-<div class="col-4">
-    <div class="input-group mb-3" >
-        <span>發行日期：</span>
-        <VueDatePicker v-model="date" :format="dateFormat" placeholder="Select Date"></VueDatePicker>
-    </div>
-</div>
-
-<div class="col-4" v-if="artist">
-    <p>歌唱者/藝人：</p>
-    <select class="form-select" @change="checkSelected('artist')" id="artistSelect">
-        <option selected hidden>請選擇藝人</option>
-        <option v-for="anart in artist" :key="anart.artistNo" :value="anart.artistNo">{{ anart.artistName }}</option>
-    </select>
-</div>
-<div class="col-4">
-    <p>商品類型：</p>
-    <select class="form-select" @change="checkSelected('type')" id="typeSelect">
-        <option selected hidden>請選擇商品類型</option>
-        <option v-for="atype in musicType" :key="atype.styleNo" :value="atype.styleNo"> {{ atype.styleType }}</option>
-    </select>
-</div>
-<div class="col-4">
-    <p>語言：</p>
-    <select class="form-select" @change="checkSelected('language')" id="languageSelect">
-        <option selected hidden>請選擇語言</option>
-        <option v-for="lan in languages" :key="lan.languageNo" :value="lan.languageNo">{{ lan.languageType }}</option>
-    </select>
-</div>
-<div class="col-4">
-    <p>音樂年份：</p>
-    <select class="form-select" @change="checkSelected('year')" id="yearSelect">
-        <option selected hidden>請選擇音樂年份</option>
-        <option v-for="year in years" :key="year.musicYearNo" :value="year.musicYearNo">{{ year.generation }}</option>
-    </select>
-</div>
-
-
-<div class="col-5">
-    <div class="input-group">
-        <span class="input-group-text">商品描述</span>
-        <textarea class="form-control" aria-label="With textarea" v-model="describe" style="width: 100%; height: 200px; resize: none;"></textarea>
-    </div>
-</div> 
-<button type="button" class="btn btn-outline-primary" @click="callCreate">新增商品</button>
-</div> -->
 </template>
     
 <script setup>
     import axios from '@/plugins/axios';
+    import Swal from 'sweetalert2';
     // import VueDatePicker from '@vuepic/vue-datepicker';
     // import '@vuepic/vue-datepicker/dist/main.css'
-    const discount = ref();
+    const discount = ref(false);
     const date = ref();
     const dateFormat = 'yyyy-MM-dd'
     const artist = ref(null);
@@ -217,6 +117,9 @@
     const stock = ref();
 
     import { ref, onMounted } from 'vue';
+    import { useRouter } from 'vue-router';
+    const router= useRouter();
+
     const imagePreviewUrl = ref("");
     const uploadedImage = ref("");
     const byteArray = ref(null);
@@ -284,10 +187,8 @@
         console.log(prodiscount.value);
         if(prodiscount.value == null){
             showDisErr.value = 1;
-            console.log("請輸入折數")
         } else if (prodiscount.value >= 1 || prodiscount.value <= 0 ){
             showDisErr.value = 2;
-            console.log("請輸入正確")
         } else {
             showDisErr.value = 0;
         }
@@ -336,6 +237,7 @@
         if(discount.value == true){
             discount.value = 1;
         }
+    
         
         let data = {
             "photo" : byteArray.value,
@@ -355,16 +257,53 @@
             "productStatus" : 1,
 
         }
-
-        
         console.log(data);
 
-        axios.post("/products/create", data).then(function(response){
-            console.log("response=", response);
+        if(productName.value == null || unitPrice.value == null || date.value == null ||
+        artistSelected.value == null || typeSelected.value == null || languageSelected.value == null ||
+        stock.value == null || describe.value == null){
+            Swal.fire({
+            title: "欄位未填寫完整",
+            text: "必填欄位請勿留白",
+            icon: "warning",
+            showConfirmButton: true,
+            confirmButtonText: "確認",
+            })
 
-        }).catch(function(error){
+        } else if(byteArray.value == null){
+            Swal.fire({
+            title: "未上傳商品圖片",
+            text: "是否要新增沒有圖片的產品?",
+            icon: "question",
+            showConfirmButton: true,
+            confirmButtonText: "確認新增",
+            showCancelButton: true,
+            cancelButtonText: "回去修改",
+            }).then(function(result){
+                if(result.isConfirmed){
+                    axios.post("/products/create", data).then(function(response){
+                        console.log("response=", response);
+                        router.push({path: "/products/list"});
+            
+                    }).catch(function(error){
+                        console.log("error=", error);
+                    })
+                }
 
-        })
+            });
+        } else {
+
+            axios.post("/products/create", data).then(function(response){
+                console.log("response=", response);
+                router.push({path: "/products/list"});
+    
+            }).catch(function(error){
+                console.log("error=", error);
+    
+            })
+        }
+        
+
     }
 
 

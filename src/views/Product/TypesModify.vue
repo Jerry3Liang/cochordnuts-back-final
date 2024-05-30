@@ -1,8 +1,17 @@
 <template>
-    <ArtistsModify></ArtistsModify>
-    <MusicTypesModify></MusicTypesModify>
-    <LanguageModify></LanguageModify>
-    <YearModify></YearModify>
+    <div class="block">
+        <ArtistsModify></ArtistsModify>
+    </div>
+    <div class="block">
+        <MusicTypesModify></MusicTypesModify>
+    </div>
+    <div class="block">
+        <LanguageModify></LanguageModify>
+    </div>
+    <div class="block">
+        <YearModify></YearModify>
+    </div>
+
 </template>
     
 <script setup>
@@ -14,5 +23,12 @@
 </script>
     
 <style>
-    
+    .block{
+        margin: 2%;
+        padding: 2%;
+        border: 3px solid gray;
+        width: 40%;
+        border-radius: 5%;
+        float: left
+    }
 </style>

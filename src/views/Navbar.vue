@@ -39,7 +39,7 @@
         </div>
     </nav> -->
 
-    <div id="wrapper" style="margin-right: 2%;">
+    <div id="wrapper" style="margin-right: 2%;" >
         <div id="nav">
         <ul>
             <li class="color">
@@ -51,10 +51,9 @@
             <li class="color">
                 <div class="main">商品管理</div>
                 <ul class="subs">
-                    <li><RouterLink to="/types/modify" class="dropdown-item">TypesModify</RouterLink></li>
-                    <li><RouterLink to="/product/insert" class="dropdown-item">ProductInsert</RouterLink></li>
-                    <li><RouterLink to="/product/modify" class="dropdown-item">ProductModify</RouterLink></li>
-                    <li><RouterLink to="/products/list" class="dropdown-item">ProductsList</RouterLink></li>
+                    <li><RouterLink to="/types/modify" class="dropdown-item">類型修改</RouterLink></li>
+                    <li><RouterLink to="/product/insert" class="dropdown-item">商品新增</RouterLink></li>
+                    <li><RouterLink to="/products/list" class="dropdown-item">商品列表</RouterLink></li>
                 </ul>
             </li>
             <li class="color">
@@ -120,7 +119,7 @@
         line-height: 60px;
         text-indent:25px;
         background-color:#6699CC;
-        border-right:10px solid #0D9BE5;
+        /* border-right:10px solid #0D9BE5; */
         cursor:pointer;
     }
 
@@ -131,8 +130,8 @@
         line-height: 40px;
         text-indent:25px;
         background-color:#F5F5F5;
-        border-right:10px solid #0D9BE5;
-        font-size:12px;
+        /* border-right:10px solid #0D9BE5; */
+        font-size:large;
         color: #164158;
     }
 
@@ -140,12 +139,12 @@
     /* main menu*/
     li.color div.main {
         background-color:#6699CC;
-        border-right:10px solid #0D9BE5;
+        /* border-right:10px solid #0D9BE5; */
     }
 
     /* sub menu*/
     li.color ul.subs li a {
-        border-right:10px solid #0D9BE5;
+        /* border-right:10px solid #0D9BE5; */
         /* color: #0D9BE5; */
     }
 
@@ -156,10 +155,12 @@
         background-color: #CCCCCC;
         /* color: #FFF; */
     }
-
+    /* div.main:hover {
+        background-color: #CCCCCC;
+    } */
 
     /* -------  sub menu open------- */
-    li.color-blue div.open {
+    /* li.color-blue div.open {
         background:url("images/arrow.png") no-repeat #0D9BE5 28px bottom;
     }
 
@@ -173,10 +174,10 @@
 
     li.color-green div.open {
         background:url("images/arrow.png") no-repeat #15B59B 28px bottom;
-    }
+    } */
 
     /* ------- mouseover ------- */
-    li.color-blue div.rollover {
+    /* li.color-blue div.rollover {
         background-color: #0D9BE5;
     }
 
@@ -190,5 +191,5 @@
 
     li.color-green div.rollover {
         background-color: #15B59B;
-    }
+    } */
 </style>

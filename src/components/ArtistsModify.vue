@@ -1,17 +1,13 @@
 <template>
     <h3>演出者/藝人編輯</h3>
+    <div>
     <input type="text" v-model="artistName">
-    <button @click="artistAdd">新增</button>
+    <button @click="artistAdd" style="margin: 1%" class="btn btn-light">新增</button>
     <h3 style="font-weight: bold;">演出者/藝人</h3>
-    <select multiple size="6" class="col-5">
+    <select multiple size="6" class="col-10">
         <option v-for="anart in artist" :key="anart.artistNo" :value="anart.artistNo">{{ anart.artistName }}</option>
-    </select>
-    <!-- <table v-if="artist">
-        <tr><td style="font-weight: bold; font-size: large;">演出者/藝人</td></tr>
-        <tr v-for="anart in artist" :key="anart.artistNo" :value="anart.artistNo">
-            <td>
-                {{ anart.artistName }}</td></tr>
-    </table> -->
+    </select><br>
+    </div>
 </template>
     
 <script setup>

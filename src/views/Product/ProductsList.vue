@@ -30,11 +30,14 @@
     
 <script setup>
     import { ref, onMounted } from 'vue';
+    import { useRouter } from 'vue-router';
     import axios from '@/plugins/axios.js';
     // import ProductCard from '@/components/ProductCard.vue';
     // import ProductDetail from './ProductDetail.vue';
     const products = ref(null);
+    const router= useRouter();
     const prodStatus = ref();
+
     onMounted(function(){
         callFind();
     })

@@ -1,7 +1,7 @@
 <template>
     <h3>歌曲年代編輯</h3>
     <input type="text" v-model="generation">
-    <button @click="yearAdd">新增</button>
+    <button @click="yearAdd" class="btn btn-light" style="margin: 1%">新增</button>
     <h3 style="font-weight: bold;">歌曲年代</h3>
     <select multiple size="6" class="col-5">
         <option v-for="year in years" :key="year.musicYearNo" :value="year.musicYearNo">{{ year.generation }}</option>
