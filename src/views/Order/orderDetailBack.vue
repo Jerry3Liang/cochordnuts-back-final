@@ -13,7 +13,7 @@
                         <th scope="col">小計</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody class="no-border-table td">
                 <tr v-for="(anOrderDetail,index) in od" :key="index">
                         <th  scope="row" >{{index+1}}</th>
                         <td>{{anOrderDetail.productName}}</td>
@@ -27,7 +27,7 @@
         </table>
         
         
-      
+
         
         <label for="outputMember" class="form-label"><h2>運送方式</h2></label> 
         <table class="table">
@@ -42,15 +42,15 @@
                 <tbody>
                 <tr>
                         <th scope="row">運送方式</th>
-                        <td>{{deliveryType}}</td>
-                        <td></td>
-                        <td></td>
+                        <th>{{deliveryType}}</th>
+                        <th></th>
+                        <th></th>
                 </tr>
                 <tr>
                         <th scope="row">{{homeOrConvinientStore}}</th>
-                        <td>{{address}}</td>
-                        <td></td>
-                        <td></td>
+                        <th>{{address}}</th>
+                        <th></th>
+                        <th></th>
                 </tr>
                 </tbody>
                 </table> 
@@ -71,15 +71,15 @@
                 <tbody>
                 <tr>
                         <th scope="row">姓名</th>
-                        <td>{{recipientName}}</td>
-                        <td></td>
-                        <td></td>
+                        <th>{{recipientName}}</th>
+                        <th></th>
+                        <th></th>
                 </tr>
                 <tr>
                         <th scope="row">電話</th>
-                        <td>{{recipientPhone}}</td>
-                        <td></td>
-                        <td></td>
+                        <th>{{recipientPhone}}</th>
+                        <th></th>
+                        <th></th>
                 </tr>
                 </tbody>
                 </table> 
@@ -131,21 +131,21 @@
                 <tbody>
                 <tr>
                         <th scope="row">付款方式</th>
-                        <td>{{payment}}</td>
-                        <td>{{ isPayByCredit }}</td>
-                        <td>{{ creditCardNo }}</td>
+                        <th>{{payment}}</th>
+                        <th>{{ isPayByCredit }}</th>
+                        <th>{{ creditCardNo }}</th>
                 </tr>
                 <tr>
                         <th scope="row">發票方式</th>
-                        <td>{{receiptType}}</td>
-                        <td></td>
-                        <td></td>
+                        <th>{{receiptType}}</th>
+                        <th></th>
+                        <th></th>
                 </tr>
                 <tr>
                         <th scope="row">發票號碼</th>
-                        <td>{{receipt}}</td>
-                        <td></td>
-                        <td></td>
+                        <th>{{receipt}}</th>
+                        <th></th>
+                        <th></th>
                 </tr>
                 </tbody>
                 </table> 
@@ -160,10 +160,10 @@
                         <button type="button" class="btn btn-primary button-spacing" @click="doShip" v-show="isShip">出貨</button><!-- 狀態改為已出貨 -->
                         <button type="button" class="btn btn-primary button-spacing" @click="doComplete" v-show="isComplete">完成訂單</button><!-- 狀態改為完成訂單 -->
                         <button type="button" class="btn btn-primary button-spacing" @click="doCancel" v-show="isCancel">取消訂單</button><!-- 狀態改為取消訂單 -->
+                        <RouterLink to="/order/back"> <button type="button" class="btn btn-primary button-spacing" >回上頁</button></RouterLink>
 
 
-
-                </div>
+                </div> 
                 
         </template>
         
@@ -535,7 +535,14 @@
         </script>
         
         <style>
+        .no-border-table th,
+        .no-border-table td {
+                border: none !important;
+        }
+
         .button-spacing {
+                margin-bottom: 10px;
                 margin-right: 5px; /* 設定按鈕間的右邊距為 10 像素 */
         }
+
         </style>

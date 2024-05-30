@@ -7,7 +7,7 @@
         </div>
     </div>
 
-<table class="table table-striped table-hover">
+<table class="table table-striped table-hover no-border-table">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -20,13 +20,14 @@
   </thead>
   <tbody>
     <tr v-for="(anOrder,index) in orders" :key="index">
-      <th scope="row">{{ index+1 }}</th>
+      <td scope="row">{{ index+1 }}</td>
       <td>{{ anOrder.orderNo  }}</td>
       <td>{{ anOrder.memberNo }}</td>
       <td>$ {{ anOrder.totalPay }}</td>
       <td>{{ anOrder.lastModifiedDate }}</td>
       <td>{{ anOrder.status }}</td>
-      <button type="button" class="btn btn-outline-secondary" @click="seeDetail(anOrder.orderNo)">查看詳細內容</button>
+      <button type="button" class="btn btn-outline-dark" @click="seeDetail(anOrder.orderNo)">查看詳細內容</button>
+
     </tr>
   </tbody>
 </table>
@@ -63,10 +64,10 @@ onMounted(function(){
   doChangePage();
 })
 function doSearch(){
-
+  current.value=1
   console.log(current.value)
   let data={
-      "start":start.value,
+      "start":0,
       "rows":rows.value,
       "num":orderSearch.value
     }
@@ -116,6 +117,7 @@ function doChangePage(page){
     axiosapi.post("/orders/findAll",data).then(function(response){
       orders.value=[]
       console.log(response.data)
+      console.log(response.data.list.length)
       pages.value=Math.ceil(response.data.count/rows.value)//算出頁數
       for(let i = 0 ; i<response.data.list.length;i++){
           orders.value.push(response.data.list[i]);
@@ -150,5 +152,10 @@ function seeDetail(orderNo){
 </script>
     
 <style>
-    
+  .no-border-table,
+  .no-border-table th,
+  .no-border-table td {
+    border: none !important;
+  }
+
 </style>
