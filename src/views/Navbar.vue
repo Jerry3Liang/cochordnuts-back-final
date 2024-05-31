@@ -1,7 +1,7 @@
 <template>
     <div style="display: flex;">
         <RouterLink to="/" class="dropdown-item" style="width: 80%; margin: 2%;">
-            <img src="/logo.jpeg" style="width: 100%;">
+            <img src="/logo.png" style="width: 100%;">
         </RouterLink>
         
     </div>

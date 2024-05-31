@@ -1,5 +1,10 @@
 <template>
-    <h3>ProductsList</h3>
+    <div style="text-align: center">
+        <h3>商品列表</h3>
+    </div>
+    <!-- <div style="width:30%; margin: auto;">
+        <Search></Search>
+    </div> -->
     <div>
         <table v-if="products" class="table table-hover">
             <thead>
@@ -32,8 +37,9 @@
     import { ref, onMounted } from 'vue';
     import { useRouter } from 'vue-router';
     import axios from '@/plugins/axios.js';
-    // import ProductCard from '@/components/ProductCard.vue';
-    // import ProductDetail from './ProductDetail.vue';
+    import Search from '@/components/Search.vue';
+    import Paginate from 'vuejs-paginate-next';
+
     const products = ref(null);
     const router= useRouter();
     const prodStatus = ref();
