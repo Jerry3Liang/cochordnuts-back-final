@@ -10,7 +10,6 @@
 <table class="table table-striped table-hover no-border-table">
   <thead>
     <tr>
-      <th scope="col">#</th>
       <th scope="col">訂單編號</th>
       <th scope="col">客戶編號</th>
       <th scope="col">金額</th>
@@ -21,7 +20,7 @@
   </thead>
   <tbody>
     <tr v-for="(anOrder,index) in orders" :key="index">
-      <td scope="row">{{ index+1 }}</td>
+  
       <td>{{ anOrder.orderNo  }}</td>
       <td>{{ anOrder.memberNo }}</td>
       <td>$ {{ anOrder.totalPay }}</td>
