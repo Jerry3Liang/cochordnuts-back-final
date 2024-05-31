@@ -15,6 +15,7 @@
       <th scope="col">客戶編號</th>
       <th scope="col">金額</th>
       <th scope="col">更新時間</th>
+      <th scope="col">付款狀態</th>
       <th scope="col">狀態</th>
     </tr>
   </thead>
@@ -25,6 +26,7 @@
       <td>{{ anOrder.memberNo }}</td>
       <td>$ {{ anOrder.totalPay }}</td>
       <td>{{ anOrder.lastModifiedDate }}</td>
+      <td>{{ anOrder.paymentStatus }}</td>
       <td>{{ anOrder.status }}</td>
       <button type="button" class="btn btn-outline-dark" @click="seeDetail(anOrder.orderNo)">查看詳細內容</button>
 

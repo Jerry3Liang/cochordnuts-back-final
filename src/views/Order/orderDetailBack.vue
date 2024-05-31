@@ -136,6 +136,13 @@
                         <th>{{ creditCardNo }}</th>
                 </tr>
                 <tr>
+                        <th scope="row">付款狀態</th>
+                        <th>{{paymentStatus}}</th>
+                        <th></th>
+                        <th></th>
+                </tr>
+                
+                <tr>
                         <th scope="row">發票方式</th>
                         <th>{{receiptType}}</th>
                         <th></th>
@@ -210,12 +217,13 @@
         const receiptNo=ref('')
         const memberNo=ref(0)
         const status=ref('')
-
+        const paymentStatus=ref('')
 
         //取得Order&orderDetail
         axiosapi.get(`/orders/findByOrderNo/${id.value}`).then(function(response){
                 console.log("dofind")
                 console.log(response.data)
+                paymentStatus.value=response.data.order.paymentStatus
                 for(let i =0 ;i<response.data.orderDetailDto.length;i++){//讀取後端傳入OrderDetailDto
                         od.value.push(response.data.orderDetailDto[i])//放入od陣列
                 }
