@@ -208,7 +208,7 @@
             console.log("response=",response.data);
             Swal.fire({
             icon: "success",
-            title: "已加入購物車",
+            title: "已成功修改商品",
             showConfirmButton: true,
             confirmButtonText: "確認",
             }).then(function(result){
