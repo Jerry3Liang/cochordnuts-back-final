@@ -1,12 +1,13 @@
 <template>
     <div style="text-align: center">
-        <h3>商品列表</h3>
+        <h1>商品列表</h1>
     </div>
     
     <div style="width:30%; margin: auto;">
         <input type="text" class="form-control" v-model="productName" placeholder="商品名稱" aria-label="Recipient's username" aria-describedby="button-addon2" @input="doSearch"
-            style="margin: 5%;">
+            style="margin: 5%; float: left;">
     </div>
+    <button class="btn btn-light" style="margin-top: 1.5%" @click="sorting">產品編號排序↑↓</button>
     <div>
         <table class="table table-hover">
             <thead>
@@ -33,6 +34,16 @@
             </tbody>
         </table>
     </div>
+    <Paginate class="justify-content-center"
+                :first-last-button="true"
+                first-button-text="&lt;&lt;"
+                last-button-text="&gt;&gt;"
+                prev-text="&lt;"
+                next-text="&gt;"
+                :page-count="pages"
+                :initial-page="initial"
+                :click-handler="callFind"
+                ></Paginate>
 </template>
     
 <script setup>
@@ -46,12 +57,30 @@
     const prodStatus = ref();
     const productName = ref(null);
 
+    const pages = ref(100);
+    const initial = ref(1);
+    const start = ref(0);
+    const rows = ref(15);
+    const total = ref(0);
+    const direction = ref(true);
 
     onMounted(function(){
         callFind();
     })
-    function callFind(){
-        axios.get("/products/findAll").then(function(response){
+    function callFind(page){
+        if(page){
+            start.value = (page -1) * rows.value;
+            initial.value = page;
+        } else {
+            start.value = 0;
+        }
+        let data = {
+            "start" : start.value,
+            "rows" : rows.value,
+            "direction" : direction.value,
+            "order" : "productNo",
+        }
+        axios.post(`/products/search`, data).then(function(response){
 			console.log("response", response.data);
             products.value = response.data;
             
@@ -60,13 +89,34 @@
             console.log("callFind error", error);
             products.value = null;
         })
+
+        axios.post("/products/searchCount", data).then(function(response){
+			console.log("count=", response.data);
+            total.value = response.data
+            pages.value = Math.ceil(response.data / rows.value);
+            // lastPageRows.value = response.data % rows.value;
+        }).catch(function(error){
+            console.log("searchCount", error);
+        })
+
+
     }
 
-    function doSearch(){
+    function doSearch(page){
+
+        if(page){
+            start.value = (page -1) * rows.value;
+            initial.value = page;
+        } else {
+            start.value = 0;
+        }
 
         let data = {
             "productName" : productName.value,
-            "rows" : 15,
+            "rows" : rows.value,
+            "direction" : direction.value,
+            "order" : "productNo",
+            "start" : start.value,
         }
 
         axios.post(`/products/search`, data).then(function(response){
@@ -77,6 +127,27 @@
             console.log("error=", error);
             products.value = null;
         })
+
+        axios.post("/products/searchCount", data).then(function(response){
+			console.log("count=", response.data);
+            total.value = response.data
+            pages.value = Math.ceil(response.data / rows.value);
+            // lastPageRows.value = response.data % rows.value;
+        }).catch(function(error){
+            console.log("searchCount", error);
+        })
+
+
+    }
+
+    function sorting(){
+        if(direction.value == true){
+            direction.value = false
+        } else if(direction.value == false) {
+            direction.value = true
+        }
+        console.log(direction.value);
+        doSearch();
     }
     
 </script>

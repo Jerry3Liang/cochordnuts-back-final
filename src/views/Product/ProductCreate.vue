@@ -1,6 +1,6 @@
 <template>
     <div style="text-align: center; margin-bottom: 1%;">
-        <h3>商品新增</h3>
+        <h1>商品新增</h1>
         <hr>
     </div>
     <div style="float: left; margin-right: 5%;">
@@ -24,7 +24,14 @@
             <span class="input-group-text" id="basic-addon1">庫存數量</span>
             <input type="number" v-model="stock" class="form-control" placeholder="請輸入商品庫存數量(必填)" aria-label="Username" aria-describedby="basic-addon1">
         </div>
-
+        
+        <div class="input-group mb-3">
+            <span>發行日期：</span>
+            <input class="input-group-text" v-model="date" type="date" placeholder="Select Date"></input>
+        </div>
+        <div style="display: flex">
+        <fieldset style="border: 1px solid #ababab; padding: 5%; border-radius: 15px; width: 48%; margin: 1%">
+        <legend style="margin-top: -50px; background-color: aliceblue; width: 60%;">商品類型填寫</legend>
         <div class="form-check">
             <input class="form-check-input" type="checkbox" :value="isBest" id="flexCheckDefault" @change="show('bestChange')">
             <label class="form-check-label" for="flexCheckDefault">暢銷商品</label>
@@ -32,7 +39,7 @@
         <div class="form-check">
             <input class="form-check-input" type="checkbox" :value="discount" id="flexCheckDefault" v-model="discount" @change="checkDis">
             <label class="form-check-label" for="flexCheckDefault">折扣商品</label>
-            <div class="col-5" v-if="discount">
+            <div  v-if="discount">
                 <div class="input-group mb-3" style="float: left;">
                     <span class="input-group-text" id="basic-addon1">折數</span>
                     <input type="text" v-model="prodiscount" class="form-control" placeholder="請輸入產品折數" aria-label="Username" aria-describedby="basic-addon1" @blur="checkDis">
@@ -40,7 +47,7 @@
                 <span v-show="showDisErr == 1" style="color: red;">請輸入商品折數</span>
                 <span v-show="showDisErr == 2" style="color: red;">請輸入正確的商品折數</span>
             </div>
-            <div class="col-6" v-if="!discount">
+            <div v-if="!discount">
                 <div class="input-group mb-3" >
                     <span class="input-group-text" id="basic-addon1">折數</span>
                     <input type="text" class="form-control" placeholder="請先勾選為折扣商品" aria-label="Username" aria-describedby="basic-addon1" disabled>
@@ -51,44 +58,44 @@
             <input class="form-check-input" type="checkbox" :value="isPreOrder" id="flexCheckDefault" @change="show('preOrder')">
             <label class="form-check-label" for="flexCheckDefault">預購商品</label>
         </div>
+        </fieldset>
+        
 
-        <div class="input-group mb-3">
-            <span>發行日期：</span>
-            <input class="input-group-text" v-model="date" type="date" placeholder="Select Date"></input>
-        </div>
-
-        <div class="col-4" v-if="artist">
+        <fieldset style="border: 1px solid #ababab; padding: 5%; border-radius: 15px; width: 48%; margin: 1%">
+        <legend style="margin-top: -50px; background-color: aliceblue; width: 60%;">音樂類型填寫</legend>
+        <div  v-if="artist">
             <p>歌唱者/藝人(必填)：</p>
             <select class="form-select" @change="checkSelected('artist')" id="artistSelect">
                 <option selected hidden>請選擇藝人</option>
                 <option v-for="anart in artist" :key="anart.artistNo" :value="anart.artistNo">{{ anart.artistName }}</option>
             </select>
         </div>
-        <div>
+        <div >
             <p>商品類型(必填)：</p>
             <select class="form-select" @change="checkSelected('type')" id="typeSelect">
                 <option selected hidden>請選擇商品類型</option>
                 <option v-for="atype in musicType" :key="atype.styleNo" :value="atype.styleNo"> {{ atype.styleType }}</option>
             </select>
         </div>
-        <div>
+        <div >
             <p>語言(必填)：</p>
             <select class="form-select" @change="checkSelected('language')" id="languageSelect">
                 <option selected hidden>請選擇語言</option>
                 <option v-for="lan in languages" :key="lan.languageNo" :value="lan.languageNo">{{ lan.languageType }}</option>
             </select>
         </div>
-        <div>
+        <div >
             <p>音樂年份(必填)：</p>
             <select class="form-select" @change="checkSelected('year')" id="yearSelect">
                 <option selected hidden>請選擇音樂年份</option>
                 <option v-for="year in years" :key="year.musicYearNo" :value="year.musicYearNo">{{ year.generation }}</option>
             </select>
         </div>
-
+        </fieldset>
+        </div>
         <div>
             <div>
-                <span>商品描述(必填)：</span>
+                <h5>商品描述(必填)：</h5>
                 <textarea class="form-control" aria-label="With textarea" v-model="describe" style="width: 100%; height: 200px; resize: none; white-space: pre-wrap;"></textarea>
             </div>
         </div>

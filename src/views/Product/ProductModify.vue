@@ -14,8 +14,14 @@
             </div>
             <input type="file" @change="handleFileUpload">
         </div>
-        <div class="card" style="padding: 5%;">
+        <div class="card" style="padding: 5%; width: 60%;">
             商品名稱：<input type="text" v-model="product.productName" class="col-6">
+            發行日：<input type="date" class="col-6" :value="product.publishedDate" id="dateSelect" @change="checkSelected('date')">
+            原價：<input type="text" v-model="product.unitPrice" class="col-6">
+            
+            <div style="display: flex; margin-top: 2%">
+            <fieldset style="border: 1px solid #ababab; padding: 5%; border-radius: 15px; width: 48%; margin: 1%">
+            <legend style="margin-top: -50px; background-color: aliceblue; width: 60%;">音樂類型填寫</legend>
             <p>演出者：</p>
             <select class="form-select" @change="checkSelected('artist')" id="artistSelect">
                 <option value="0" hidden>{{ product.artistType }}</option>
@@ -36,10 +42,10 @@
                 <option value="0" hidden>{{ product.musicYear }}</option>
                 <option v-for="year in years" :key="year.musicYearNo" :value="year.musicYearNo">{{ year.generation }}</option>
             </select>
-            發行日：<input type="date" class="col-6" :value="product.publishedDate" id="dateSelect" @change="checkSelected('date')">
-            原價：<input type="text" v-model="product.unitPrice" class="col-6">
-
-
+            </fieldset>
+            
+            <fieldset style="border: 1px solid #ababab; padding: 5%; border-radius: 15px; width: 48%; margin: 1%">
+            <legend style="margin-top: -50px; background-color: aliceblue; width: 60%;">商品類型填寫</legend>
             <div class="form-check">
                 <input v-show="isBest ===1" class="form-check-input" type="checkbox" checked @change="checkType('bestChange')">
                 <input v-show="isBest ===0" class="form-check-input" type="checkbox" @change="checkType('bestChange')">
@@ -60,6 +66,9 @@
 
             折數：<input v-show="isDiscount ===1" type="text" v-model="product.discount" class="col-6">
             <input v-show="isDiscount ===0" type="text" v-model="product.discount" class="col-6" disabled>
+            </fieldset>
+            </div>
+
             <p>售價：{{ Math.round(product.unitPrice * product.discount) }}</p>
             <p>庫存：<input type="number" v-model="product.stock"></p>
             商品狀態：
@@ -69,7 +78,7 @@
                 <option value="0">已下架</option>
             </select>
             商品描述：<textarea v-model="product.describe" style="width: 100%; height: 200px; resize: none;"></textarea>
-            <div>
+            <div style="text-align: center;">
                 <button type="button" class="btn btn-outline-primary" @click="checkForm">送出</button>
             </div>
             

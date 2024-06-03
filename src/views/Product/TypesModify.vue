@@ -1,4 +1,8 @@
 <template>
+    <div>
+        <h1 style="margin-left: 35%;">音樂類型新增</h1>
+        <hr>
+    </div>
     <div class="block">
         <ArtistsModify></ArtistsModify>
     </div>

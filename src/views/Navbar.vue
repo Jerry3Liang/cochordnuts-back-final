@@ -53,7 +53,7 @@
                     <img src="/down.png" style="width: 10%;">
                 </div>
                 <ul class="subs" v-if="list">
-                    <li><RouterLink to="/types/modify" class="dropdown-item">類型修改</RouterLink></li>
+                    <li><RouterLink to="/types/modify" class="dropdown-item">類型新增</RouterLink></li>
                     <li><RouterLink to="/product/insert" class="dropdown-item">商品新增</RouterLink></li>
                     <li><RouterLink to="/products/list" class="dropdown-item">商品列表</RouterLink></li>
                 </ul>
