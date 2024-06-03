@@ -1,5 +1,6 @@
 <template>
-    <h3>DetailBack</h3>
+    <!-- <h3>DetailBack</h3> -->
+    <h3>商品詳細頁面</h3>
     <div v-if="product">
         <ProductInfoBack :productObj="product"></ProductInfoBack>
     </div>

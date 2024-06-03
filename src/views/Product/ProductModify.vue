@@ -61,7 +61,7 @@
             折數：<input v-show="isDiscount ===1" type="text" v-model="product.discount" class="col-6">
             <input v-show="isDiscount ===0" type="text" v-model="product.discount" class="col-6" disabled>
             <p>售價：{{ Math.round(product.unitPrice * product.discount) }}</p>
-            <p>庫存：{{ product.stock }}</p>
+            <p>庫存：<input type="number" v-model="product.stock"></p>
             商品狀態：
             <select class="col-6" id="status" @change="checkSelected('status')">
                 <option value="2" hidden>{{ productSta }}</option>

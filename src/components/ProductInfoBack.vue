@@ -1,9 +1,9 @@
 <template>
-    <h3>InfoBack</h3>
+    <!-- <h3>InfoBack</h3> -->
         <figure class="card" style="width: 25rem; margin-right: 5%; float: left;">
             <img :src="`${path}${productObj.productNo}`" class="img-thumbnail" alt="無法載入">
         </figure>
-        <div class="card" style="padding: 5%; height: 25rem;">
+        <div class="card" style="padding: 3%; height: 25rem;">
             <h2>{{ productObj.productName }}</h2>
             <p>演出者：{{ productObj.artistType }}</p>
             <p>發行日：{{ productObj.publishedDate }}</p>

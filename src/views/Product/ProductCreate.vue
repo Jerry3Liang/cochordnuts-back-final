@@ -1,5 +1,8 @@
 <template>
-    <h3>商品新增</h3>
+    <div style="text-align: center; margin-bottom: 1%;">
+        <h3>商品新增</h3>
+        <hr>
+    </div>
     <div style="float: left; margin-right: 5%;">
         <div v-if="imagePreviewUrl">
             <figure class="card" style="width: 20rem;">
@@ -8,7 +11,7 @@
         </div>
         <input type="file" @change="handleFileUpload">
     </div>
-    <div class="card" style="padding: 5%; width: 60%; float: right" >
+    <div class="card" style="padding-left: 5%; padding-right: 5%; padding-top: 5%; width: 60%; " >
         <div class="input-group mb-3 col-4">
             <span class="input-group-text" id="basic-addon1">商品名稱</span>
             <input type="text" v-model="productName" class="form-control" placeholder="請輸入產品名稱(必填)" aria-label="Username" aria-describedby="basic-addon1">
