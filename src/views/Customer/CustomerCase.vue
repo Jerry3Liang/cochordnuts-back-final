@@ -14,12 +14,12 @@
     </thead>
     <tbody>
     <tr v-for="cstCase in customerCases" :key="cstCase.id">
-      <th scope="row">
+      <td>
 <!--        <RouterLink to="/Customer/FinishCaseDetail" @click="callFinishFindMsgByCaseNo(cstCase.caseNo)">{{cstCase.caseNo}}</RouterLink>-->
 <!--        <RouterView></RouterView>-->
 <!--        <a @click="callFinishFindMsgByCaseNo(cstCase.caseNo)">{{cstCase.caseNo}}</a>-->
         <button type="button" class="btn btn-link" @click="callFinishFindMsgByCaseNo(cstCase.caseNo)" :disabled="isDisabled(cstCase.status)">{{cstCase.caseNo}}</button>
-      </th>
+      </td>
       <td>{{cstCase.customerName}}</td>
       <td>{{cstCase.subject}}</td>
       <td>{{cstCase.lastAnswerDate}}</td>
@@ -241,6 +241,41 @@ function isDisabled(status) {
 
 <style scoped>
 .table {
-  border: none;
+  border-collapse: collapse;
+  /* 確保邊框不會重疊 */
+  width: 100%;
+
 }
+
+.table th,
+.table td
+ {
+  border-left: none;
+  /* 移除左側邊框 */
+  border-top: none;
+  border-right: none;
+  /* 移除右側邊框 */
+  padding: 8px;
+
+}
+
+.table tr {
+
+  border-bottom: 1px solid #c4bfbf;
+  /* 設置行與行之間的邊框顏色 */
+
+}
+
+.table th {
+  background-color: #f2f2f2;
+  text-align: left;
+
+}
+
+.table tr:last-child {
+  border-bottom: none;
+  /* 移除最後一行的底部邊框 */
+
+}
+
 </style>
