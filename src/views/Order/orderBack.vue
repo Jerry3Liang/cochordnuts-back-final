@@ -1,5 +1,5 @@
 <template>
-      <div class="row mt-5">
+      <div class="row mt-5" style="margin-bottom: 20px;">
         <div class="col-md-5 mx-auto">
             <div class="input-group">
                 <input class="form-control border rounded-pill" type="text" placeholder="輸入訂單編號" v-model="orderSearch" @input="doSearch">
@@ -7,15 +7,16 @@
         </div>
     </div>
 
-<table class="table table-striped table-hover no-border-table">
+<table class="table table-striped table-hover no-border-table" style="text-align: center; margin-bottom: 30px;">
   <thead>
     <tr>
-      <th scope="col">訂單編號</th>
-      <th scope="col">客戶編號</th>
-      <th scope="col">金額</th>
-      <th scope="col">更新時間</th>
-      <th scope="col">付款狀態</th>
-      <th scope="col">狀態</th>
+      <th scope="col" style="width: 85px;">訂單編號</th>
+      <th scope="col" style="width: 85px;">客戶編號</th>
+      <th scope="col" style="width: 90px;">金額</th>
+      <th scope="col" style="width: 200px;">更新時間</th>
+      <th scope="col" style="width: 100px;">付款狀態</th>
+      <th scope="col" style="width: 100px;">狀態</th>
+      <th scope="col" style="width: 150px;">檢視</th>
     </tr>
   </thead>
   <tbody>
@@ -27,7 +28,7 @@
       <td>{{ anOrder.lastModifiedDate }}</td>
       <td>{{ anOrder.paymentStatus }}</td>
       <td>{{ anOrder.status }}</td>
-      <button type="button" class="btn btn-outline-dark" @click="seeDetail(anOrder.orderNo)">查看詳細內容</button>
+      <td><button style="padding :0 5px;" type="button" class="btn btn-outline-dark" @click="seeDetail(anOrder.orderNo)">查看詳細內容</button></td>
 
     </tr>
   </tbody>
