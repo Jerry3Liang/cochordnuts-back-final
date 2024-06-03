@@ -1,5 +1,5 @@
 <template>
-
+        <label class="form-label"><h2>訂單編號：{{id}}</h2></label> <br>
         <label for="outputMember" class="form-label"><h2>購買商品明細</h2></label> 
         <table class="table table-striped table-hover">
         
@@ -253,6 +253,7 @@
                 receipt.value=response.data.order.receiptNo
                 note.value=response.data.order.note
                 status.value=response.data.order.status
+                
                 if(preparationDate.value==null){
                         isAccept.value=true
                         console.log(isAccept.value)
@@ -311,27 +312,28 @@
 
         function doCancel(){
                 if(status.value=='訂單成立'|| status.value=='備貨中'){
-                        let data ={
-                "orderNo":id.value,
-                "creditCardNo":creditCardNo.value,
-                "receiptType":receiptType.value,
-                "payment":payment.value,
-                "totalCount":totalCount.value,
-                "totalPay":total.value,
-                "deliverType":deliveryType.value,
-                "recipientAddress":address.value,
-                "recipient":recipientName.value,
-                "recipientPhone":recipientPhone.value,
-                "note":note.value,
-                "preparationDate":preparationDate.value,
-                "createDate":createDate.value,
-                "address":originAdress.value,
-                "freight":freight.value,
-                "receiptNo":receiptNo.value,
-                "dispatchDate":dispatchDate.value,
-                "completeDate":completeDate.value,
-                "status":'訂單取消'
-        }
+                let data ={
+                        "orderNo":id.value,
+                        "creditCardNo":creditCardNo.value,
+                        "receiptType":receiptType.value,
+                        "payment":payment.value,
+                        "totalCount":totalCount.value,
+                        "totalPay":total.value,
+                        "deliverType":deliveryType.value,
+                        "recipientAddress":address.value,
+                        "recipient":recipientName.value,
+                        "recipientPhone":recipientPhone.value,
+                        "note":note.value,
+                        "preparationDate":preparationDate.value,
+                        "createDate":createDate.value,
+                        "address":originAdress.value,
+                        "freight":freight.value,
+                        "receiptNo":receiptNo.value,
+                        "dispatchDate":dispatchDate.value,
+                        "completeDate":completeDate.value,
+                        "status":'訂單取消'
+                        
+                }
                 Swal.fire({
                 title: "確認取消?",
                 icon: "warning",
@@ -394,7 +396,8 @@
                 "receiptNo":receiptNo.value,
                 "dispatchDate":dispatchDate.value,
                 "completeDate":completeDate.value,
-                "status":'完成訂單'
+                "status":'完成訂單',
+                "paymentStatus":'已付款'
                 }
 
 
