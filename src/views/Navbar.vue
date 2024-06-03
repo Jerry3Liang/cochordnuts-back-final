@@ -39,7 +39,7 @@
         </div>
     </nav> -->
 
-    <div id="wrapper" style="margin-right: 2%;" >
+    <div id="wrapper" style="" >
         <div id="nav">
         <ul>
             <li class="color">
@@ -49,8 +49,10 @@
                 
             </li>
             <li class="color">
-                <div class="main">商品管理</div>
-                <ul class="subs">
+                <div class="main" @click="showList">商品管理
+                    <img src="/down.png" style="width: 10%;">
+                </div>
+                <ul class="subs" v-if="list">
                     <li><RouterLink to="/types/modify" class="dropdown-item">類型修改</RouterLink></li>
                     <li><RouterLink to="/product/insert" class="dropdown-item">商品新增</RouterLink></li>
                     <li><RouterLink to="/products/list" class="dropdown-item">商品列表</RouterLink></li>
@@ -73,6 +75,18 @@
 </template>
     
 <script setup>
+    import { ref } from 'vue';
+    const list = ref(false);
+    function showList(){
+        if(list.value == false){
+            list.value = true;
+        }else{
+            list.value = false;
+
+        }
+    }
+
+
 
 </script>
     
@@ -115,21 +129,23 @@
 
     div.main {
         font-size: larger;
+        font-weight: bold;
         height: 60px;
         line-height: 60px;
         text-indent:25px;
-        background-color:#6699CC;
-        /* border-right:10px solid #0D9BE5; */
+        background-color:#d6d0c9;
         cursor:pointer;
     }
 
+
     ul.subs li a {
         /* font-size: larger; */
+        padding-left: 10%;
         display:block;
         height: 40px;
         line-height: 40px;
         text-indent:25px;
-        background-color:#F5F5F5;
+        background-color:#d9b5b0;
         /* border-right:10px solid #0D9BE5; */
         font-size:large;
         color: #164158;
@@ -138,7 +154,11 @@
     /* ------- color selection ------- */
     /* main menu*/
     li.color div.main {
-        background-color:#6699CC;
+        background-color:#d9b5b0;
+        /* border-right:10px solid #0D9BE5; */
+    }
+    li.color div.main:hover {
+        background-color:#d0a59f;
         /* border-right:10px solid #0D9BE5; */
     }
 
@@ -152,44 +172,10 @@
 
 
     li.color ul.subs li a:hover {
-        background-color: #CCCCCC;
+        background-color: #d0a59f;
         /* color: #FFF; */
     }
-    /* div.main:hover {
-        background-color: #CCCCCC;
-    } */
+    
 
-    /* -------  sub menu open------- */
-    /* li.color-blue div.open {
-        background:url("images/arrow.png") no-repeat #0D9BE5 28px bottom;
-    }
 
-    li.color-red div.open {
-        background:url("images/arrow.png") no-repeat #FD2621 28px bottom;
-    }
-
-    li.color-yellow div.open {
-        background:url("images/arrow.png") no-repeat #FF8D00 28px bottom;
-    }
-
-    li.color-green div.open {
-        background:url("images/arrow.png") no-repeat #15B59B 28px bottom;
-    } */
-
-    /* ------- mouseover ------- */
-    /* li.color-blue div.rollover {
-        background-color: #0D9BE5;
-    }
-
-    li.color-red div.rollover {
-        background-color: #FD2621;
-    }
-
-    li.color-yellow div.rollover {
-        background-color: #FF8D00;
-    }
-
-    li.color-green div.rollover {
-        background-color: #15B59B;
-    } */
 </style>
