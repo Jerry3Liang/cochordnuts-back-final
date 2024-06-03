@@ -77,7 +77,9 @@ function doSearch(){
       orders.value=[]
       console.log(response.data)
       pages.value=Math.ceil(response.data.count/rows.value)//算出頁數
+      console.log('頁數',pages.value)
       for(let i = 0 ; i<response.data.list.length;i++){
+        
           orders.value.push(response.data.list[i]);
           orders.value[i].lastModifiedDate=moment(orders.value[i].lastModifiedDate).format('YYYY-MM-DD HH:mm:ss')
       }

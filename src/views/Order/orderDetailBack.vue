@@ -1,6 +1,7 @@
 <template>
         <label class="form-label"><h2>訂單編號：{{id}}</h2></label> <br>
-        <label for="outputMember" class="form-label"><h2>購買商品明細</h2></label> 
+        <label for="outputMember" class="form-label" style=" margin-bottom: 0;"><h2>購買商品明細</h2></label> 
+        
         <table class="table table-striped table-hover">
         
                 <thead>
@@ -14,6 +15,7 @@
                 </tr>
                 </thead>
                 <tbody class="no-border-table td">
+        
                 <tr v-for="(anOrderDetail,index) in od" :key="index">
                         <th  scope="row" >{{index+1}}</th>
                         <td>{{anOrderDetail.productName}}</td>
@@ -29,11 +31,10 @@
         
 
         
-        <label for="outputMember" class="form-label"><h2>運送方式</h2></label> 
         <table class="table">
                 <thead>     
                 <tr>
-                        <th scope="col"></th>
+                        <th scope="col"><h2>運送資訊</h2></th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                         <th scope="col"></th>
@@ -58,11 +59,10 @@
         
         
         <!-- 收件人資料 -->
-        <label for="outputMember" class="form-label"><h2>收件人資料</h2></label> 
         <table class="table">
                 <thead>     
                 <tr>
-                        <th scope="col"></th>
+                        <th scope="col"><h2>收件人資料</h2></th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                         <th scope="col"></th>
@@ -90,7 +90,7 @@
                 <table class="table">
                 <thead>
                         <tr>
-                        <th scope="col"></th>
+                        <th scope="col"><h2>訂單金額</h2></th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                         <th scope="col"></th>
@@ -118,11 +118,11 @@
         
         
         
-        <label for="outputMember" class="form-label"><h2>付款方式</h2></label> 
+
         <table class="table">
                 <thead>     
                 <tr>
-                        <th scope="col"></th>
+                        <th scope="col"><h2>付款方式</h2></th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                         <th scope="col"></th>
