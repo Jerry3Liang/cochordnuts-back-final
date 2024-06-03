@@ -28,8 +28,8 @@
       <td>{{ anOrder.lastModifiedDate }}</td>
       <td>{{ anOrder.paymentStatus }}</td>
       <td>{{ anOrder.status }}</td>
-      <td><button style="padding :0 5px;" type="button" class="btn btn-outline-dark" @click="seeDetail(anOrder.orderNo)">查看詳細內容</button></td>
-
+      <td><button style="padding :0 2px;height: 35px;" type="button" class="btn btn-outline-success" @click="seeDetail(anOrder.orderNo)">查看詳細內容</button></td>
+      
     </tr>
   </tbody>
 </table>
