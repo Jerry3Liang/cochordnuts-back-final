@@ -1,14 +1,14 @@
 <template>
     <h3>商品新增</h3>
-    <div style="float: left; margin-right: 5%;">
+    <div style="float: left; margin-right: 0;">
         <div v-if="imagePreviewUrl">
-            <figure class="card" style="width: 20rem;">
+            <figure class="card" style="width: 25rem;">
                 <img :src="imagePreviewUrl" class="img-thumbnail" alt="無法載入">
             </figure>
         </div>
         <input type="file" @change="handleFileUpload">
     </div>
-    <div class="card" style="padding: 5%; width: 60%; float: right" >
+    <div class="card" style="width: 60%; margin-right: 5%;" >
         <div class="input-group mb-3 col-4">
             <span class="input-group-text" id="basic-addon1">商品名稱</span>
             <input type="text" v-model="productName" class="form-control" placeholder="請輸入產品名稱(必填)" aria-label="Username" aria-describedby="basic-addon1">
@@ -89,7 +89,7 @@
                 <textarea class="form-control" aria-label="With textarea" v-model="describe" style="width: 100%; height: 200px; resize: none; white-space: pre-wrap;"></textarea>
             </div>
         </div>
-        <div style="text-align: center; margin: 5%">
+        <div style="text-align: center;">
         <button type="button" class="btn btn-outline-primary" @click="callCreate">新增商品</button> 
         </div>
             
