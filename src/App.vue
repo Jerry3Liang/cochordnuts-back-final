@@ -3,13 +3,14 @@
     <NavigationBar></NavigationBar>
   </div>
   <div style="width: 75%; float: right; margin-top: 5%; ">
-  <RouterView></RouterView></div>
+    <RouterView></RouterView></div>
 </template>
 
 <script setup>
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import NavigationBar from "@/views/Navbar.vue";
+
 </script>
 
 <style>

@@ -12,6 +12,8 @@
     import ProductInfoBack from '@/components/ProductInfoBack.vue';
     
     import axios from '@/plugins/axios.js';
+    import Swal from "sweetalert2";
+    import axiosApi from "@/plugins/axios.js";
     
 
     const route = useRoute();

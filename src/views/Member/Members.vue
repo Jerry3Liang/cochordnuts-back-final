@@ -1,5 +1,16 @@
 <template>
     <h1>會員列表</h1>
+  <div style="text-align: right; margin-bottom: 10px">
+    <div v-show="islogined">
+      <div style="margin-left: inherit">
+        員工姓名： {{ empName }}<br>
+        上次登入時間:{{ loginTime }}
+      </div>
+      <div>
+        <button type="button" class="btn btn-success" @click="logout()">登出</button>
+      </div>
+    </div>
+  </div>
     <table class="table">
         <thead>
             <tr>
@@ -35,12 +46,23 @@
 import axiosapi from '@/plugins/axios.js';
 import { RouterLink, useRouter } from 'vue-router';
 import { ref, onMounted } from 'vue';
+import Swal from "sweetalert2";
+import axiosApi from "@/plugins/axios.js";
+
+const router = useRouter();
 
 const members = ref([]);
 const count = ref(0);
 
+//員工登入登出
+const islogined = ref("");
+const empName = ref("");
+const loginTime = ref("");
 
 onMounted(() => {
+    islogined.value = sessionStorage.getItem("isLoggedIn");
+    empName.value = sessionStorage.getItem("empName");
+    loginTime.value = sessionStorage.getItem("loginTime");
     axiosapi.post('/members/find', {})
         .then(response => {
             members.value = response.data.list;
@@ -53,6 +75,61 @@ onMounted(() => {
 
 function chMember(memberNo) {
     sessionStorage.setItem("memberNo", memberNo);
+}
+
+function logout(){
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You will be logged out!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, logout!"
+  }).then(function (result) {
+    if (result.isConfirmed) {
+      let lastLoginTime = sessionStorage.getItem("lastLoginTime");
+      let empName = sessionStorage.getItem("empName");
+      let employeeNo = sessionStorage.getItem("employeeNo");
+      let jsonData = {
+        lastLoginTime: lastLoginTime,
+        name: empName,
+        employeeNo: employeeNo
+      };
+      console.log('last=' + lastLoginTime);
+      axiosApi.post("/rest/employeeLogout", jsonData)
+          .then(function (response) {
+            if (response.data.success) {
+              Swal.fire({
+                title: "Logged out!",
+                text: "You have been logged out.",
+                icon: "success"
+              }).then(function () {
+                sessionStorage.clear();
+                router.push("/");
+              });
+            } else {
+              Swal.fire({
+                text: response.data.message || 'Logout failed!',
+                icon: 'error',
+                allowOutsideClick: false,
+                confirmButtonText: '確認',
+              }); router.push({ name: "employee-login-link" });
+            }
+          })
+          .catch(function (error) {
+            console.error('Logout failed:', error);
+            Swal.fire({
+              text: '登出失敗：' + error.message,
+              icon: 'error',
+              allowOutsideClick: false,
+              confirmButtonText: '確認',
+            });
+          });
+    } else {
+      router.push({ name: "home-link" });
+    };
+  });
 }
 
 </script>

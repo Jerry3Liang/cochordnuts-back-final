@@ -89,6 +89,8 @@
 </template>
     
 <script setup>
+    import axiosApi from "@/plugins/axios.js";
+
     const path = import.meta.env.VITE_PHOTO_URL;
     import { ref, onMounted } from 'vue';
     import { useRoute, useRouter } from 'vue-router';
@@ -130,6 +132,7 @@
         callFindById(id);
         callTypes();
     })
+
 
     function handleFileUpload(event) {
         const file = event.target.files[0];

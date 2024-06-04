@@ -10,8 +10,7 @@
       <label for="exampleInputPassword1" class="form-label">密碼：</label>
       <input type="password" name="password" class="form-control" id="empPassword" v-model="password">
     </div>
-    <button type="submit" class="btn btn-primary" @click="empLogin">登入</button>
-
+    <button type="button" class="btn btn-primary" @click="empLogin">登入</button>
   </form>
 </template>
 
@@ -59,10 +58,9 @@ function empLogin() {
             confirmButtonText: '確認'
           }).then(function (result) {
             if (result.isConfirmed) {
-              console.log(response.data);
               axiosApi.defaults.headers.authorization = 'Bearer ' + response.data.token;
               sessionStorage.setItem("user", response.data.user);
-              sessionStorage.setItem("empName", response.data.empName);
+              sessionStorage.setItem("empName", response.data.name);
               sessionStorage.setItem("lastLoginTime", response.data.lastLoginTime);
               sessionStorage.setItem("employeeNo", response.data.employeeNo);
               sessionStorage.setItem("isLoggedIn", true);

@@ -1,5 +1,16 @@
 <template>
-        <label for="outputMember" class="form-label" style=" margin-bottom: 0;"><h2>購買商品明細</h2></label> 
+        <label for="outputMember" class="form-label" style=" margin-bottom: 0;"><h2>購買商品明細</h2></label>
+  <div style="float: right; margin-bottom: 5px">
+    <div v-show="islogined">
+      <div>員工姓名： {{ empName }}</div>
+      <div>上次登入時間:{{ loginTime }}
+        <button type="button" class="btn btn-success" @click="logout()">登出</button>
+      </div>
+    </div>
+    <div v-show="!islogined">
+      <RouterLink type="button" class="btn btn-success" to="/Employee/EmployeeLogin">登入</RouterLink>
+    </div>
+  </div>
         
         <table class="table table-striped table-hover">
         
@@ -192,12 +203,18 @@
         <script setup >
         import Swal from 'sweetalert2';
         import axiosapi from '@/plugins/axios.js';
-        import { ref } from 'vue';       
+        import { ref, onMounted } from 'vue';
         import { useRoute,useRouter } from 'vue-router';
+        import axiosApi from "@/plugins/axios.js";
         const route=useRoute();
         const router=useRouter()
         const id= ref(route.query.orderNumber)//orderNo
         console.log(id.value)
+
+        //員工登入登出
+        const islogined = ref("");
+        const empName = ref("");
+        const loginTime = ref("");
 
 
         //判斷button是否顯示
@@ -233,6 +250,12 @@
         const memberNo=ref(0)
         const status=ref('')
         const paymentStatus=ref('')
+
+        onMounted(function(){
+          islogined.value = sessionStorage.getItem("isLoggedIn");
+          empName.value = sessionStorage.getItem("empName");
+          loginTime.value = sessionStorage.getItem("loginTime");
+        })
 
         //取得Order&orderDetail
         axiosapi.get(`/orders/findByOrderNo/${id.value}`).then(function(response){
@@ -556,6 +579,61 @@
                         });
 
         });
+        }
+
+        function logout(){
+          Swal.fire({
+            title: "Are you sure?",
+            text: "You will be logged out!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, logout!"
+          }).then(function (result) {
+            if (result.isConfirmed) {
+              let lastLoginTime = sessionStorage.getItem("lastLoginTime");
+              let empName = sessionStorage.getItem("empName");
+              let employeeNo = sessionStorage.getItem("employeeNo");
+              let jsonData = {
+                lastLoginTime: lastLoginTime,
+                name: empName,
+                employeeNo: employeeNo
+              };
+              console.log('last=' + lastLoginTime);
+              axiosApi.post("/rest/employeeLogout", jsonData)
+                  .then(function (response) {
+                    if (response.data.success) {
+                      Swal.fire({
+                        title: "Logged out!",
+                        text: "You have been logged out.",
+                        icon: "success"
+                      }).then(function () {
+                        sessionStorage.clear();
+                        router.push("/");
+                      });
+                    } else {
+                      Swal.fire({
+                        text: response.data.message || 'Logout failed!',
+                        icon: 'error',
+                        allowOutsideClick: false,
+                        confirmButtonText: '確認',
+                      }); router.push({ name: "employee-login-link" });
+                    }
+                  })
+                  .catch(function (error) {
+                    console.error('Logout failed:', error);
+                    Swal.fire({
+                      text: '登出失敗：' + error.message,
+                      icon: 'error',
+                      allowOutsideClick: false,
+                      confirmButtonText: '確認',
+                    });
+                  });
+            } else {
+              router.push({ name: "home-link" });
+            };
+          });
         }
         
         </script>

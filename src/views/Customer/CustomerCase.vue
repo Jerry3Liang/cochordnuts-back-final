@@ -1,15 +1,29 @@
 <template>
   <h1>顯示客服提問列表</h1>
+  <div style="text-align: right; margin-bottom: 10px">
+    <div v-show="islogined">
+      <div style="margin-left: inherit">
+        員工姓名： {{ empName }}<br>
+        上次登入時間:{{ loginTime }}
+      </div>
+      <div>
+        <button type="button" class="btn btn-success" @click="logout()">登出</button>
+      </div>
+    </div>
+    <div v-show="!islogined">
+      <RouterLink type="button" class="btn btn-success" to="/Employee/EmployeeLogin">登入</RouterLink>
+    </div>
+  </div>
   <table class="table">
     <thead>
     <tr>
-      <th scope="col">案件編號</th>
-      <th scope="col">客戶姓名</th>
+      <th scope="col">客服案件編號</th>
+      <th scope="col" v-show="islogined">客戶姓名</th>
       <th scope="col">問題</th>
       <th scope="col">最後回覆時間</th>
-      <th scope="col">回覆員工姓名</th>
+      <th scope="col" v-show="islogined">最後回覆員工姓名</th>
       <th scope="col">回覆狀態</th>
-      <th scope="col">操作</th>
+      <th scope="col" v-show="islogined">操作</th>
     </tr>
     </thead>
     <tbody>
@@ -20,16 +34,16 @@
 <!--        <a @click="callFinishFindMsgByCaseNo(cstCase.caseNo)">{{cstCase.caseNo}}</a>-->
         <button type="button" class="btn btn-link" @click="callFinishFindMsgByCaseNo(cstCase.caseNo)" :disabled="isDisabled(cstCase.status)">{{cstCase.caseNo}}</button>
       </td>
-      <td>{{cstCase.customerName}}</td>
+      <td v-show="islogined">{{cstCase.customerName}}</td>
       <td>{{cstCase.subject}}</td>
       <td>{{cstCase.lastAnswerDate}}</td>
-      <td>{{cstCase.answerEmployee}}</td>
+      <td v-show="islogined">{{cstCase.answerEmployee}}</td>
       <td>
         <div v-if="cstCase.status ===0">未回覆</div>
         <div v-else-if="cstCase.status ===1">回覆中</div>
         <div v-else>結案</div>
       </td>
-      <td>
+      <td v-show="islogined">
         <div v-show="cstCase.status ===1"></div>
         <button type="button" class="btn btn-primary" @click="callFindMsgByCaseNo(cstCase.caseNo)" v-show="cstCase.status ===1 || cstCase.status === 0" style="margin: 3px">回覆</button>
         <button type="button" class="btn btn-success" @click="callModify(cstCase.caseNo)" v-show="cstCase.status ===1 || cstCase.status === 0" style="margin: 3px">結案</button>
@@ -53,8 +67,12 @@ import Swal from 'sweetalert2';
 import Paginate from "vuejs-paginate-next"
 import {ref, onMounted} from 'vue';
 //跳轉用
-import {useRouter} from 'vue-router';
+import {RouterLink, useRouter} from 'vue-router';
 const router = useRouter();
+
+const islogined = ref("");
+const empName = ref("");
+const loginTime = ref("");
 
 
 
@@ -80,6 +98,9 @@ const lastPageRows = ref(0);
 // //pagination end
 
 onMounted(function(){
+  islogined.value = sessionStorage.getItem("isLoggedIn");
+  empName.value = sessionStorage.getItem("empName");
+  loginTime.value = sessionStorage.getItem("loginTime");
   callFind();
 });
 
@@ -235,6 +256,61 @@ function isDisabled(status) {
   // 你的條件判斷邏輯，例如：
   // 假設當 caseNo 為空時禁用按鈕
   return status === 1 || status === 0;
+}
+
+function logout(){
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You will be logged out!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, logout!"
+  }).then(function (result) {
+    if (result.isConfirmed) {
+      let lastLoginTime = sessionStorage.getItem("lastLoginTime");
+      let empName = sessionStorage.getItem("empName");
+      let employeeNo = sessionStorage.getItem("employeeNo");
+      let jsonData = {
+        lastLoginTime: lastLoginTime,
+        name: empName,
+        employeeNo: employeeNo
+      };
+      console.log('last=' + lastLoginTime);
+      axiosApi.post("/rest/employeeLogout", jsonData)
+          .then(function (response) {
+            if (response.data.success) {
+              Swal.fire({
+                title: "Logged out!",
+                text: "You have been logged out.",
+                icon: "success"
+              }).then(function () {
+                sessionStorage.clear();
+                router.push("/");
+              });
+            } else {
+              Swal.fire({
+                text: response.data.message || 'Logout failed!',
+                icon: 'error',
+                allowOutsideClick: false,
+                confirmButtonText: '確認',
+              }); router.push({ name: "employee-login-link" });
+            }
+          })
+          .catch(function (error) {
+            console.error('Logout failed:', error);
+            Swal.fire({
+              text: '登出失敗：' + error.message,
+              icon: 'error',
+              allowOutsideClick: false,
+              confirmButtonText: '確認',
+            });
+          });
+    } else {
+      router.push({ name: "home-link" });
+    };
+  });
 }
 
 </script>

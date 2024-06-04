@@ -1,11 +1,24 @@
 <template>
   <h2>客服問答內容</h2>
   <span style="font-size: 30px; font-weight: 500" >客戶提問：<span v-if="subject">{{subject}}</span></span>
-
+  <div style="text-align: right; margin-bottom: 10px">
+    <div v-show="islogined">
+      <div style="margin-left: inherit">
+        員工姓名： {{ empName }}<br>
+        上次登入時間:{{ loginTime }}
+      </div>
+      <div>
+        <button type="button" class="btn btn-success" @click="logout()">登出</button>
+      </div>
+    </div>
+    <div v-show="!islogined">
+      <RouterLink type="button" class="btn btn-success" to="/Employee/EmployeeLogin">登入</RouterLink>
+    </div>
+  </div>
   <div class="card" v-for="msg in caseMessages" :key="msg.id" v-if="caseNo !== null">
     <div class="card-header">
       <span>時間：{{msg.messageTime}}</span><span style="margin: 50px" v-show="msg.employeeName != null">客服： {{msg.employeeName}}</span><span style="margin: 50px" v-show="msg.memberName != null">會員： {{msg.memberName}}</span>
-      <span style="float: right" v-show="msg.employeeName != null"><button type="button" class="btn btn-outline-info" @click="callUpdateMsgByCaseDetailNo(msg.caseDetailNo)">編輯</button></span>
+      <span style="float: right" v-show="msg.employeeName == empName"><button type="button" class="btn btn-outline-info" @click="callUpdateMsgByCaseDetailNo(msg.caseDetailNo)">編輯</button></span>
     </div>
     <div class="card-body">
       <p class="card-text"><h3>{{msg.message}}</h3></p>
@@ -29,7 +42,7 @@ import axiosApi from '@/plugins/axios.js';
 import Swal from 'sweetalert2';
 import {ref, onMounted} from 'vue';
 //從另一個頁面帶參數跳過來
-import {useRoute} from 'vue-router';
+import {RouterLink, useRoute} from 'vue-router';
 const route = useRoute();
 const id = ref(route.query.caseNumber);
 const orderNo = ref(route.query.orderNumber);
@@ -37,8 +50,17 @@ const orderNo = ref(route.query.orderNumber);
 import {useRouter} from 'vue-router';
 const router = useRouter();
 
+//
+const employeeNo = sessionStorage.getItem("employeeNo");
+const islogined = ref("");
+const empName = ref("");
+const loginTime = ref("");
+
 
 onMounted(function (){
+  islogined.value = sessionStorage.getItem("isLoggedIn");
+  empName.value = sessionStorage.getItem("empName");
+  loginTime.value = sessionStorage.getItem("loginTime");
   callFindMsgByCaseNo(id.value);
   callFindSubjectByCaseNo(id.value);
 })
@@ -83,7 +105,7 @@ function callCreateMessage(){
   let data = {
     "customerCaseNo": id.value,
     "answerMessage" : answerMessage.value,
-    "employeeNo": 1
+    "employeeNo": employeeNo
   }
 
   axiosApi.post("/rest/Answer", data)
@@ -183,6 +205,61 @@ function callUpdateMsgByCaseDetailNo(caseDetailNo) {
         // router.push("/secure/login");
       }
     });
+  });
+}
+
+function logout(){
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You will be logged out!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, logout!"
+  }).then(function (result) {
+    if (result.isConfirmed) {
+      let lastLoginTime = sessionStorage.getItem("lastLoginTime");
+      let empName = sessionStorage.getItem("empName");
+      let employeeNo = sessionStorage.getItem("employeeNo");
+      let jsonData = {
+        lastLoginTime: lastLoginTime,
+        name: empName,
+        employeeNo: employeeNo
+      };
+      console.log('last=' + lastLoginTime);
+      axiosApi.post("/rest/employeeLogout", jsonData)
+          .then(function (response) {
+            if (response.data.success) {
+              Swal.fire({
+                title: "Logged out!",
+                text: "You have been logged out.",
+                icon: "success"
+              }).then(function () {
+                sessionStorage.clear();
+                router.push({ name: "home-link" });
+              });
+            } else {
+              Swal.fire({
+                text: response.data.message || 'Logout failed!',
+                icon: 'error',
+                allowOutsideClick: false,
+                confirmButtonText: '確認',
+              }); router.push({ name: "employee-login-link" });
+            }
+          })
+          .catch(function (error) {
+            console.error('Logout failed:', error);
+            Swal.fire({
+              text: '登出失敗：' + error.message,
+              icon: 'error',
+              allowOutsideClick: false,
+              confirmButtonText: '確認',
+            });
+          });
+    } else {
+      router.push({ name: "home-link" });
+    };
   });
 }
 
