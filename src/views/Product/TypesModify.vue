@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1 style="margin-left: 35%;">音樂類型新增</h1>
-      <div style="text-align: right">
+        <div style="text-align: right">
         <div v-show="islogined">
           <div>員工姓名： {{ empName }}</div>
           <div>上次登入時間:{{ loginTime }}

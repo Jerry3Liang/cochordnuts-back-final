@@ -1,14 +1,14 @@
 <template>
     <div style="text-align: center">
         <h1>商品列表</h1>
-      <div style="text-align: right">
+        <div style="text-align: right">
         <div v-show="islogined">
-          <div>員工姓名： {{ empName }}</div>
-          <div>上次登入時間:{{ loginTime }}
+            <div>員工姓名： {{ empName }}</div>
+            <div>上次登入時間:{{ loginTime }}
             <button type="button" class="btn btn-success" @click="logout()">登出</button>
-          </div>
+            </div>
         </div>
-      </div>
+        </div>
     </div>
     
     <div style="width:30%; margin: auto;">
