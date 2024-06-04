@@ -1,5 +1,4 @@
 <template>
-        <label class="form-label"><h2>訂單編號：{{id}}</h2></label> <br>
         <label for="outputMember" class="form-label" style=" margin-bottom: 0;"><h2>購買商品明細</h2></label> 
         
         <table class="table table-striped table-hover">
@@ -33,8 +32,8 @@
         
         <table class="table">
                 <thead>     
-                <tr>
-                        <th scope="col"><h2>運送資訊</h2></th>
+                <tr >
+                        <th scope="col" ><h2>運送資訊</h2></th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                         <th scope="col"></th>
@@ -42,12 +41,12 @@
                 </thead>
                 <tbody>
                 <tr>
-                        <th scope="row">運送方式</th>
-                        <th>{{deliveryType}}</th>
-                        <th></th>
-                        <th></th>
+                        <th scope="row" style="width: 15%;">運送方式：</th>
+                        <th style="width: 20%;">{{deliveryType}}</th>
+                        <th style="width: 30%;"></th>
+                        <th style="width: 30%;"></th>
                 </tr>
-                <tr>
+                <tr >
                         <th scope="row">{{homeOrConvinientStore}}</th>
                         <th>{{address}}</th>
                         <th></th>
@@ -70,8 +69,8 @@
                 </thead>
                 <tbody>
                 <tr>
-                        <th scope="row">姓名</th>
-                        <th>{{recipientName}}</th>
+                        <th scope="row" style="width: 15%;">姓名</th>
+                        <th style="width: 20%;">{{recipientName}}</th>
                         <th></th>
                         <th></th>
                 </tr>
@@ -90,8 +89,24 @@
                 <table class="table">
                 <thead>
                         <tr>
-                        <th scope="col"><h2>訂單金額</h2></th>
+                        <th scope="col"><h2>訂單資訊</h2></th>
                         <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        </tr>
+                </thead>
+                <thead>
+                        <tr>
+                        <th scope="col" style="width: 15%;">訂單編號</th>
+                        <th scope="col" style="width: 20%;">{{id}}</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        </tr>
+                </thead>
+                <thead>
+                        <tr>
+                        <th scope="col">訂單狀態</th>
+                        <th scope="col">{{status}}</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                         </tr>
@@ -99,17 +114,17 @@
                 <thead>
                         <tr>
                         <th scope="col">運費</th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
                         <th scope="col">60</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
                         </tr>
                 </thead>
                 <thead>
                         <tr>
-                        <th scope="col">訂單金額</th>
+                        <th scope="col">訂單總金額</th>
+                        <th scope="col">${{total}}</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
-                        <th scope="col">{{total}}</th>
                         </tr>
                 </thead>
                 </table>
@@ -130,10 +145,10 @@
                 </thead>
                 <tbody>
                 <tr>
-                        <th scope="row">付款方式</th>
-                        <th>{{payment}}</th>
-                        <th>{{ isPayByCredit }}</th>
-                        <th>{{ creditCardNo }}</th>
+                        <th scope="row" style="width: 15%;">付款方式</th>
+                        <th style="width: 20%;">{{payment}}</th>
+                        <th></th>
+                        <th></th>
                 </tr>
                 <tr>
                         <th scope="row">付款狀態</th>
@@ -546,11 +561,11 @@
         </script>
         
         <style>
+
         .no-border-table th,
         .no-border-table td {
                 border: none !important;
         }
-
         .button-spacing {
                 margin-bottom: 10px;
                 margin-right: 5px; /* 設定按鈕間的右邊距為 10 像素 */
