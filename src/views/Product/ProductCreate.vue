@@ -30,13 +30,17 @@
             <input class="input-group-text" v-model="date" type="date" placeholder="Select Date"></input>
         </div>
         <div style="display: flex">
-        <fieldset style="border: 1px solid #ababab; padding: 5%; border-radius: 15px; width: 48%; margin: 1%">
-        <legend style="margin-top: -50px; background-color: aliceblue; width: 60%;">商品類型填寫</legend>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" :value="isBest" id="flexCheckDefault" @change="show('bestChange')">
-            <label class="form-check-label" for="flexCheckDefault">暢銷商品</label>
-        </div>
-        <div class="form-check">
+            <fieldset style="border: 1px solid #ababab; padding: 5%; border-radius: 15px; width: 48%; margin: 1%">
+                <legend style="margin-top: -50px; background-color: aliceblue; width: 60%;">商品類型填寫</legend>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" :value="isBest" id="flexCheckDefault" @change="show('bestChange')">
+                    <label class="form-check-label" for="flexCheckDefault">暢銷商品</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" :value="isPreOrder" id="flexCheckDefault" @change="show('preOrder')">
+                    <label class="form-check-label" for="flexCheckDefault">預購商品</label>
+                </div>
+            <div class="form-check">
             <input class="form-check-input" type="checkbox" :value="discount" id="flexCheckDefault" v-model="discount" @change="checkDis">
             <label class="form-check-label" for="flexCheckDefault">折扣商品</label>
             <div  v-if="discount">
@@ -54,10 +58,8 @@
                 </div>
             </div>
         </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" :value="isPreOrder" id="flexCheckDefault" @change="show('preOrder')">
-            <label class="form-check-label" for="flexCheckDefault">預購商品</label>
-        </div>
+
+
         </fieldset>
         
 
