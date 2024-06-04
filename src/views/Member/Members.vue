@@ -15,8 +15,9 @@
         </thead>
         <tbody>
             <tr v-for="member in members" :key="member.memberNo">
-
-                <td>{{ member.memberNo }}</td>
+                <td>
+                    <RouterLink to="/member" @click="chMember(member.memberNo)">{{ member.memberNo }}</RouterLink>
+                </td>
                 <td>{{ member.name }}</td>
                 <td>{{ member.registerTime }}</td>
                 <td>{{ member.lastLoginTime }}</td>
@@ -32,18 +33,16 @@
 </template>
 <script setup>
 import axiosapi from '@/plugins/axios.js';
-
+import { RouterLink, useRouter } from 'vue-router';
 import { ref, onMounted } from 'vue';
 
-// 使用 ref 创建响应式变量
 const members = ref([]);
 const count = ref(0);
 
-// 在组件挂载后发送请求获取数据
+
 onMounted(() => {
     axiosapi.post('/members/find', {})
         .then(response => {
-            // 更新响应式变量的值
             members.value = response.data.list;
             count.value = response.data.count;
         })
@@ -51,16 +50,11 @@ onMounted(() => {
             console.error('Error fetching data:', error);
         });
 });
-const formatBirthday = (dateString) => {
-    // 检查日期字符串是否以 'T' 分隔
-    if (dateString.includes('T')) {
-        // 如果是以 'T' 分隔的，提取 yyyy-MM-dd 部分并返回
-        return dateString.split('T')[0];
-    } else {
-        // 如果不是以 'T' 分隔的，直接返回日期字符串
-        return dateString;
-    }
-};
+
+function chMember(memberNo) {
+    sessionStorage.setItem("memberNo", memberNo);
+}
+
 </script>
 <style scoped>
 .table {
