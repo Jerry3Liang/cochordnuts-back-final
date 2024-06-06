@@ -131,14 +131,7 @@
         /* border-right:10px solid #0D9BE5; */
     }
 
-    /* sub menu*/
-    li.color ul.subs li a {
-        /* border-right:10px solid #0D9BE5; */
-        /* color: #0D9BE5; */
-    }
-
-
-
+    
 
     li.color ul.subs li a:hover {
         background-color: #d0a59f;
