@@ -27,7 +27,7 @@
         <tbody>
             <tr v-for="member in members" :key="member.memberNo">
                 <td>
-                    <RouterLink to="/member" @click="chMember(member.memberNo)">{{ member.memberNo }}</RouterLink>
+                    <RouterLink style="margin-left: 10px" to="/member" @click="chMember(member.memberNo)">{{ member.memberNo }}</RouterLink>
                 </td>
                 <td>{{ member.name }}</td>
                 <td>{{ member.registerTime }}</td>
