@@ -1,5 +1,8 @@
 <template>
-    <h3>Modify</h3>
+    <div style="text-align: center; margin-bottom: 1%;">
+        <h1>商品修改</h1>
+        <hr>
+    </div>
     <div v-if="product">
         <div style="float: left; margin-right: 5%;">
             <div v-if="!imagePreviewUrl">
@@ -14,7 +17,7 @@
             </div>
             <input type="file" @change="handleFileUpload">
         </div>
-        <div class="card" style="padding: 5%; width: 60%;">
+        <div class="card" style="padding-left: 5%; padding-right: 5%; padding-top: 5%; width: 60%;">
             商品名稱：<input type="text" v-model="product.productName" class="col-6">
             發行日：<input type="date" class="col-6" :value="product.publishedDate" id="dateSelect" @change="checkSelected('date')">
             原價：<input type="text" v-model="product.unitPrice" class="col-6">
@@ -78,7 +81,7 @@
                 <option value="0">已下架</option>
             </select>
             商品描述：<textarea v-model="product.describe" style="width: 100%; height: 200px; resize: none;"></textarea>
-            <div style="text-align: center;">
+            <div style="text-align: center; margin: 5%">
                 <button type="button" class="btn btn-outline-primary" @click="checkForm">送出</button>
             </div>
             

@@ -1,14 +1,14 @@
 <template>
     <div style="text-align: center">
         <h1>商品列表</h1>
-      <div style="text-align: right">
+        <div style="text-align: right">
         <div v-show="islogined">
-          <div>員工姓名： {{ empName }}</div>
-          <div>上次登入時間:{{ loginTime }}
+            <div>員工姓名： {{ empName }}</div>
+            <div>上次登入時間:{{ loginTime }}
             <button type="button" class="btn btn-success" @click="logout()">登出</button>
-          </div>
+            </div>
         </div>
-      </div>
+        </div>
     </div>
     
     <div style="width:30%; margin: auto;">
@@ -61,6 +61,7 @@
     import Paginate from 'vuejs-paginate-next';
     import Swal from "sweetalert2";
     import axiosApi from "@/plugins/axios.js";
+    import { debounce } from 'lodash';
 
     const products = ref(null);
     const router= useRouter();
@@ -120,13 +121,16 @@
 
     }
 
-    function doSearch(page){
+    const doSearch = debounce(function(page){
 
         if(page){
             start.value = (page -1) * rows.value;
             initial.value = page;
         } else {
             start.value = 0;
+        }
+        if(productName.value == ""){
+            productName.value = null;
         }
 
         let data = {
@@ -138,6 +142,7 @@
         }
 
         axios.post(`/products/search`, data).then(function(response){
+            console.log(data);
             console.log("response=", response);
             products.value = response.data;
 
@@ -154,9 +159,9 @@
         }).catch(function(error){
             console.log("searchCount", error);
         })
+    }, 300);
 
-
-    }
+    
 
     function sorting(){
         if(direction.value == true){
@@ -169,58 +174,58 @@
     }
 
     function logout(){
-      Swal.fire({
-        title: "Are you sure?",
-        text: "You will be logged out!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, logout!"
-      }).then(function (result) {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You will be logged out!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, logout!"
+        }).then(function (result) {
         if (result.isConfirmed) {
-          let lastLoginTime = sessionStorage.getItem("lastLoginTime");
-          let empName = sessionStorage.getItem("empName");
-          let employeeNo = sessionStorage.getItem("employeeNo");
-          let jsonData = {
-            lastLoginTime: lastLoginTime,
-            name: empName,
-            employeeNo: employeeNo
-          };
-          console.log('last=' + lastLoginTime);
-          axiosApi.post("/rest/employeeLogout", jsonData)
-              .then(function (response) {
+            let lastLoginTime = sessionStorage.getItem("lastLoginTime");
+            let empName = sessionStorage.getItem("empName");
+            let employeeNo = sessionStorage.getItem("employeeNo");
+            let jsonData = {
+                lastLoginTime: lastLoginTime,
+                name: empName,
+                employeeNo: employeeNo
+            };
+            console.log('last=' + lastLoginTime);
+            axiosApi.post("/rest/employeeLogout", jsonData)
+            .then(function (response) {
                 if (response.data.success) {
-                  Swal.fire({
+                    Swal.fire({
                     title: "Logged out!",
                     text: "You have been logged out.",
                     icon: "success"
-                  }).then(function () {
+                    }).then(function () {
                     sessionStorage.clear();
                     router.push("/");
-                  });
+                    });
                 } else {
-                  Swal.fire({
+                    Swal.fire({
                     text: response.data.message || 'Logout failed!',
                     icon: 'error',
                     allowOutsideClick: false,
                     confirmButtonText: '確認',
-                  }); router.push({ name: "employee-login-link" });
+                    }); router.push({ name: "employee-login-link" });
                 }
-              })
-              .catch(function (error) {
+            })
+            .catch(function (error) {
                 console.error('Logout failed:', error);
                 Swal.fire({
-                  text: '登出失敗：' + error.message,
-                  icon: 'error',
-                  allowOutsideClick: false,
-                  confirmButtonText: '確認',
+                    text: '登出失敗：' + error.message,
+                    icon: 'error',
+                    allowOutsideClick: false,
+                    confirmButtonText: '確認',
                 });
-              });
+            });
         } else {
-          router.push({ name: "home-link" });
+            router.push({ name: "home-link" });
         };
-      });
+        });
     }
     
 </script>
