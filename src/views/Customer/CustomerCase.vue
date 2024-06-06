@@ -10,20 +10,23 @@
         <button type="button" class="btn btn-success" @click="logout()">登出</button>
       </div>
     </div>
-    <div v-show="!islogined">
-      <RouterLink type="button" class="btn btn-success" to="/Employee/EmployeeLogin">登入</RouterLink>
+    <div v-show="isGoogleLogined">
+      <div style="margin-left: inherit">
+        員工姓名： {{ googleName }}<br>
+        Email: {{ googleEmail }}
+      </div>
     </div>
   </div>
   <table class="table">
     <thead>
     <tr>
       <th scope="col">客服案件編號</th>
-      <th scope="col" v-show="islogined">客戶姓名</th>
+      <th scope="col" v-show="islogined || isGoogleLogined">客戶姓名</th>
       <th scope="col">問題</th>
       <th scope="col">最後回覆時間</th>
-      <th scope="col" v-show="islogined">最後回覆員工姓名</th>
+      <th scope="col" v-show="islogined || isGoogleLogined">最後回覆員工姓名</th>
       <th scope="col">回覆狀態</th>
-      <th scope="col" v-show="islogined">操作</th>
+      <th scope="col" v-show="islogined || isGoogleLogined">操作</th>
     </tr>
     </thead>
     <tbody>
@@ -34,16 +37,16 @@
 <!--        <a @click="callFinishFindMsgByCaseNo(cstCase.caseNo)">{{cstCase.caseNo}}</a>-->
         <button type="button" class="btn btn-link" @click="callFinishFindMsgByCaseNo(cstCase.caseNo)" :disabled="isDisabled(cstCase.status)">{{cstCase.caseNo}}</button>
       </td>
-      <td v-show="islogined">{{cstCase.customerName}}</td>
+      <td v-show="islogined || isGoogleLogined">{{cstCase.customerName}}</td>
       <td>{{cstCase.subject}}</td>
       <td>{{cstCase.lastAnswerDate}}</td>
-      <td v-show="islogined">{{cstCase.answerEmployee}}</td>
+      <td v-show="islogined || isGoogleLogined">{{cstCase.answerEmployee}}</td>
       <td>
         <div v-if="cstCase.status ===0">未回覆</div>
         <div v-else-if="cstCase.status ===1">回覆中</div>
         <div v-else>結案</div>
       </td>
-      <td v-show="islogined">
+      <td v-show="islogined || isGoogleLogined">
         <div v-show="cstCase.status ===1"></div>
         <button type="button" class="btn btn-primary" @click="callFindMsgByCaseNo(cstCase.caseNo)" v-show="cstCase.status ===1 || cstCase.status === 0" style="margin: 3px">回覆</button>
         <button type="button" class="btn btn-success" @click="callModify(cstCase.caseNo)" v-show="cstCase.status ===1 || cstCase.status === 0" style="margin: 3px">結案</button>
@@ -74,6 +77,11 @@ const islogined = ref("");
 const empName = ref("");
 const loginTime = ref("");
 
+//Google 第三方登入
+const googleName = ref("");
+const googleEmail = ref("");
+const isGoogleLogined = ref("");
+
 
 
 
@@ -101,6 +109,9 @@ onMounted(function(){
   islogined.value = sessionStorage.getItem("isLoggedIn");
   empName.value = sessionStorage.getItem("empName");
   loginTime.value = sessionStorage.getItem("loginTime");
+  googleName.value = sessionStorage.getItem("googleName");
+  googleEmail.value = sessionStorage.getItem("googleEmail");
+  isGoogleLogined.value = sessionStorage.getItem("verified_email");
   callFind();
 });
 
