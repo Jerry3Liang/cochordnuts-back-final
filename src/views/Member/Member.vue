@@ -4,7 +4,7 @@
             <div class="col-md-8 col-lg-6">
                 <div class="panel panel-info" v-if="member">
                     <div class="panel-heading">
-                        <h3 class="panel-title">會員編號:{{ member.memberNo }}</h3>
+                        <h3 class="panel-title">會員編號: {{ member.memberNo }}</h3>
                     </div>
                     <div class="panel-body">
                         <div class="row">
