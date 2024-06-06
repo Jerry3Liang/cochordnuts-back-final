@@ -1,5 +1,5 @@
 <template>
-    <h1>Home</h1>
+    <!-- <h1>Home</h1> -->
     <div v-show="islogined">
       <h2>員工姓名： {{ empName }}</h2>
       <h2>上次登入時間: {{ loginTime }}

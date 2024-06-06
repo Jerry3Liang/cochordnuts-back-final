@@ -84,6 +84,15 @@
         islogined.value = sessionStorage.getItem("isLoggedIn");
         empName.value = sessionStorage.getItem("empName");
         loginTime.value = sessionStorage.getItem("loginTime");
+        if(empName.value==null || empName.value==""){
+            Swal.fire({
+                text: '請先登入員工帳號',
+                icon: 'warning',
+                allowOutsideClick: false,
+                confirmButtonText: '確認',
+            });
+            router.push({path:"/Employee/EmployeeLogin"})
+        }
         callFind();
     })
     function callFind(page){

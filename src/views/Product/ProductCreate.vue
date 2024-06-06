@@ -39,7 +39,7 @@
         </div>
         <div style="display: flex">
             <fieldset style="border: 1px solid #ababab; padding: 5%; border-radius: 15px; width: 48%; margin: 1%">
-                <legend style="margin-top: -50px; background-color: aliceblue; width: 60%;">商品類型填寫</legend>
+                <legend style="margin-top: -50px; background-color: white; width: 60%;">商品類型填寫</legend>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" :value="isBest" id="flexCheckDefault" @change="show('bestChange')">
                     <label class="form-check-label" for="flexCheckDefault">暢銷商品</label>
@@ -72,7 +72,7 @@
         
 
         <fieldset style="border: 1px solid #ababab; padding: 5%; border-radius: 15px; width: 48%; margin: 1%">
-        <legend style="margin-top: -50px; background-color: aliceblue; width: 60%;">音樂類型填寫</legend>
+        <legend style="margin-top: -50px; background-color: white; width: 60%;">音樂類型填寫</legend>
         <div  v-if="artist">
             <p>歌唱者/藝人(必填)：</p>
             <select class="form-select" @change="checkSelected('artist')" id="artistSelect">
@@ -160,6 +160,15 @@
         islogined.value = sessionStorage.getItem("isLoggedIn");
         empName.value = sessionStorage.getItem("empName");
         loginTime.value = sessionStorage.getItem("loginTime");
+        if(empName.value==null || empName.value==""){
+            Swal.fire({
+                text: '請先登入員工帳號',
+                icon: 'warning',
+                allowOutsideClick: false,
+                confirmButtonText: '確認',
+            });
+            router.push({path:"/Employee/EmployeeLogin"})
+        }
         callTypes();
     })
 
