@@ -75,6 +75,7 @@ onMounted(() => {
     axiosapi.post('/members/find', {})
         .then(response => {
             members.value = response.data.list;
+            console.log( members.value)
             count.value = response.data.count;
         })
         .catch(error => {
