@@ -5,43 +5,7 @@
         </RouterLink>
         
     </div>
-<<<<<<< HEAD
-    
-=======
-    <!-- <nav class="navbar navbar-expand-lg" style="background-color: #D1E9E9;">
 
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span   span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item" v-if="!isLoggedIn">
-                      <RouterLink class="nav-link active" aria-current="page" to="/members">會員管理</RouterLink>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        商品管理
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><RouterLink to="/types/modify" class="dropdown-item">TypesModify</RouterLink></li>
-                            <li><RouterLink to="/product/insert" class="dropdown-item">ProductInsert</RouterLink></li>
-                            <li><RouterLink to="/product/modify" class="dropdown-item">ProductModify</RouterLink></li>
-                            <li><RouterLink to="/products/list" class="dropdown-item">ProductsList</RouterLink></li>
-                            <li><RouterLink to="/product/search" class="dropdown-item">Search</RouterLink></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item" v-if="!isLoggedIn">
-                      <RouterLink class="nav-link active" aria-current="page" to="/order/back">訂單管理</RouterLink>
-                    </li>
-                    <li class="nav-item" v-if="!isLoggedIn">
-                      <RouterLink class="nav-link active" aria-current="page" to="/Customer/CustomerCase">客服回覆信息管理</RouterLink>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav> -->
->>>>>>> ae2428a5fa9a171b628a464af99a9a3dd8f25902
 
     <div id="wrapper" style="" >
         <div id="nav">
@@ -56,10 +20,7 @@
                 <div class="main" @click="showList">商品管理
                     <img src="/down.png" style="width: 10%;">
                 </div>
-<<<<<<< HEAD
-=======
 
->>>>>>> ae2428a5fa9a171b628a464af99a9a3dd8f25902
                 <ul class="subs" v-if="list">
                     <li><RouterLink to="/types/modify" class="dropdown-item">類型新增</RouterLink></li>
                     <li><RouterLink to="/product/insert" class="dropdown-item">商品新增</RouterLink></li>
