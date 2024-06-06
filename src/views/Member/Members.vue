@@ -63,6 +63,15 @@ onMounted(() => {
     islogined.value = sessionStorage.getItem("isLoggedIn");
     empName.value = sessionStorage.getItem("empName");
     loginTime.value = sessionStorage.getItem("loginTime");
+    if(empName.value==null || empName.value==""){
+    Swal.fire({
+                        text: '請先登入員工帳號',
+                        icon: 'warning',
+                        allowOutsideClick: false,
+                        confirmButtonText: '確認',
+                    });
+    router.push({path:"/Employee/EmployeeLogin"})
+  }else{
     axiosapi.post('/members/find', {})
         .then(response => {
             members.value = response.data.list;
@@ -70,7 +79,7 @@ onMounted(() => {
         })
         .catch(error => {
             console.error('Error fetching data:', error);
-        });
+        });}
 });
 
 function chMember(memberNo) {
