@@ -113,14 +113,14 @@ const employeeNo = ref("");
 const loginTime = ref("");
 
 //Google 第三方登入
-const googleName = ref("");
+<!-- const googleName = ref("");
 const googleEmail = ref("");
-const isGoogleLogined = ref("");
+const isGoogleLogined = ref("");-->
 
 //LINE 第三方登入
-const lineName = ref("");
+<!-- const lineName = ref("");
 const lineImgPath = ref("");
-const isLineLogined = ref(false);
+const isLineLogined = ref(false); -->
 
 import {ref, onMounted} from 'vue';
 const list = ref(false);
