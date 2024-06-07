@@ -32,13 +32,24 @@
         let data = {
             "styleType" : styleType.value,
         }
-        axios.post("/product/style/add", data).then(function(response){
-            console.log("response=",response);
-            callType();
-        }).catch(function(error){
-            
-        }).finally(function(){
-        })
+        if(styleType.value == null || styleType.value == ""){
+            Swal.fire({
+            title: "欄位未填寫完整",
+            text: "必填欄位請勿留白",
+            icon: "warning",
+            showConfirmButton: true,
+            confirmButtonText: "確認",
+            })
+        } else {
+            axios.post("/product/style/add", data).then(function(response){
+                console.log("response=",response);
+                callType();
+            }).catch(function(error){
+                
+            }).finally(function(){
+            })
+
+        }
     }
 </script>
     

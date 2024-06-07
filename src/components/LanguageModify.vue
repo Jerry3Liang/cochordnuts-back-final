@@ -33,13 +33,24 @@
         let data = {
             "languageType" : languageType.value,
         }
-        axios.post("/product/language/add", data).then(function(response){
-            console.log("response=",response);
-            callLanguage();
-        }).catch(function(error){
+        if(languageType.value == null || languageType.value == ""){
+            Swal.fire({
+            title: "欄位未填寫完整",
+            text: "必填欄位請勿留白",
+            icon: "warning",
+            showConfirmButton: true,
+            confirmButtonText: "確認",
+            })
+        } else {
+            axios.post("/product/language/add", data).then(function(response){
+                console.log("response=",response);
+                callLanguage();
+            }).catch(function(error){
+                
+            }).finally(function(){
+            })
             
-        }).finally(function(){
-        })
+        }
     }
 </script>
     

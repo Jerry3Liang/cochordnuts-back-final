@@ -32,13 +32,24 @@
         let data = {
             "generation" : generation.value,
         }
-        axios.post("/product/musicYear/add", data).then(function(response){
-            console.log("response=",response);
-            callYears();
-        }).catch(function(error){
-            
-        }).finally(function(){
-        })
+        if(generation.value == null || generation.value == ""){
+            Swal.fire({
+            title: "欄位未填寫完整",
+            text: "必填欄位請勿留白",
+            icon: "warning",
+            showConfirmButton: true,
+            confirmButtonText: "確認",
+            })
+        } else {
+            axios.post("/product/musicYear/add", data).then(function(response){
+                console.log("response=",response);
+                callYears();
+            }).catch(function(error){
+                
+            }).finally(function(){
+            })
+
+        }
     }
 </script>
     

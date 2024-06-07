@@ -33,13 +33,24 @@
         let data = {
             "artistName" : artistName.value,
         }
-        axios.post("/product/artist/add", data).then(function(response){
-            console.log("response=",response);
-            callArtist();
-        }).catch(function(error){
+        if(artistName.value == null || artistName.value == ""){
+            Swal.fire({
+            title: "欄位未填寫完整",
+            text: "必填欄位請勿留白",
+            icon: "warning",
+            showConfirmButton: true,
+            confirmButtonText: "確認",
+            })
+        } else {
+            axios.post("/product/artist/add", data).then(function(response){
+                console.log("response=",response);
+                callArtist();
+            }).catch(function(error){
+                
+            }).finally(function(){
+            })
             
-        }).finally(function(){
-        })
+        }
     }
 </script>
     
