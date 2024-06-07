@@ -297,7 +297,7 @@
 
         if(productName.value == null || unitPrice.value == null || date.value == null ||
         artistSelected.value == null || typeSelected.value == null || languageSelected.value == null ||
-        stock.value == null || describe.value == null){
+        yearSelected.value == null || stock.value == null || describe.value == null){
             Swal.fire({
             title: "欄位未填寫完整",
             text: "必填欄位請勿留白",

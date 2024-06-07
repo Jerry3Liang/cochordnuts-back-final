@@ -113,14 +113,14 @@ const employeeNo = ref("");
 const loginTime = ref("");
 
 //Google 第三方登入
-<!-- const googleName = ref("");
-const googleEmail = ref("");
-const isGoogleLogined = ref("");-->
+// const googleName = ref("");
+// const googleEmail = ref("");
+// const isGoogleLogined = ref("");
 
 //LINE 第三方登入
-<!-- const lineName = ref("");
-const lineImgPath = ref("");
-const isLineLogined = ref(false); -->
+// const lineName = ref("");
+// const lineImgPath = ref("");
+// const isLineLogined = ref(false);
 
 import {ref, onMounted} from 'vue';
 const list = ref(false);
@@ -129,10 +129,10 @@ onMounted(function() {
   islogined.value = sessionStorage.getItem("isLoggedIn");
   empName.value = sessionStorage.getItem("empName");
   loginTime.value = sessionStorage.getItem("loginTime");
-  <!-- googleName.value = sessionStorage.getItem("googleName");
-  googleEmail.value = sessionStorage.getItem("googleEmail");
-  isGoogleLogined.value = sessionStorage.getItem("verified_email");
-  lineName.value = sessionStorage.getItem("displayName"); -->
+  // googleName.value = sessionStorage.getItem("googleName");
+  // googleEmail.value = sessionStorage.getItem("googleEmail");
+  // isGoogleLogined.value = sessionStorage.getItem("verified_email");
+  // lineName.value = sessionStorage.getItem("displayName");
 })
 
 
