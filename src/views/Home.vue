@@ -6,7 +6,7 @@
         <button type="button" class="btn btn-success" @click="logout()" style="margin-left: 5px">登出</button>
       </h2>
     </div>
-    <div v-show="isGoogleLogined">
+    <!-- <div v-show="isGoogleLogined">
         <h2>員工姓名： {{ googleName }}</h2>
         <h2>Email: {{ googleEmail }}
           <button type="button" class="btn btn-success" @click="logout()" style="margin-left: 5px">登出</button>
@@ -18,11 +18,11 @@
       <h2>
         <button type="button" class="btn btn-success" @click="logout()" style="margin-left: 5px">登出</button>
       </h2>
-    </div>
-    <div v-show="!islogined && !isGoogleLogined && !isLineLogined">
+    </div> -->
+    <div v-show="!islogined">
       <RouterLink type="button" class="btn btn-danger" to="/Employee/EmployeeLogin">登入</RouterLink>
-      <button type="button" class="btn btn-warning" @click="loginWithGoogle" v-show="!isGoogleLogined" style="margin-left: 5px">Google 登入</button>
-      <button type="button" class="btn btn-success" @click="loginWithLine" v-show="!isLineLogined" style="margin-left: 5px">Line 登入</button>
+      <!-- <button type="button" class="btn btn-warning" @click="loginWithGoogle" v-show="!isGoogleLogined" style="margin-left: 5px">Google 登入</button>
+      <button type="button" class="btn btn-success" @click="loginWithLine" v-show="!isLineLogined" style="margin-left: 5px">Line 登入</button> -->
     </div>
 
     <div style="margin: auto; margin-top: 3%; line-height: 30px; background-color: azure; padding: 1%; border-radius: 15px; box-shadow: 3px 3px 3px 3px gray; width: 80%;">
@@ -129,10 +129,10 @@ onMounted(function() {
   islogined.value = sessionStorage.getItem("isLoggedIn");
   empName.value = sessionStorage.getItem("empName");
   loginTime.value = sessionStorage.getItem("loginTime");
-  googleName.value = sessionStorage.getItem("googleName");
+  <!-- googleName.value = sessionStorage.getItem("googleName");
   googleEmail.value = sessionStorage.getItem("googleEmail");
   isGoogleLogined.value = sessionStorage.getItem("verified_email");
-  lineName.value = sessionStorage.getItem("displayName");
+  lineName.value = sessionStorage.getItem("displayName"); -->
 })
 
 
