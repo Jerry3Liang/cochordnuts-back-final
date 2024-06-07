@@ -12,6 +12,7 @@
 <script setup>
     import { ref, onMounted } from 'vue';
     import axios from '@/plugins/axios';
+    import Swal from "sweetalert2";
     const types = ref(null);
     const styleType = ref(null);
 

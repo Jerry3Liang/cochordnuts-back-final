@@ -13,6 +13,7 @@
 <script setup>
     import { ref, onMounted } from 'vue';
     import axios from '@/plugins/axios';
+    import Swal from "sweetalert2";
     const artist = ref(null);
     const artistName = ref(null);
 

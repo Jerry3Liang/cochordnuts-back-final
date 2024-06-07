@@ -13,6 +13,7 @@
 <script setup>
     import { ref, onMounted } from 'vue';
     import axios from '@/plugins/axios';
+    import Swal from "sweetalert2";
     const languages = ref(null);
     const languageType = ref(null);
 
