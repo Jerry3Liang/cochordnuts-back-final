@@ -10,8 +10,8 @@
             <p>NT.{{ productObj.unitPrice }}</p>
             <p>售價： {{ Math.round(productObj.unitPrice * productObj.discount) }}</p>
             <p>庫存：{{ productObj.stock }}</p>
-            <p v-show="productObj.productStatus = 1">商品狀態：上架中</p>
-            <p v-show="productObj.productStatus = 0">商品狀態：已下架</p>
+            <p v-show="productObj.productStatus == 1">商品狀態：上架中</p>
+            <p v-show="productObj.productStatus == 0">商品狀態：已下架</p>
             <div>
                 <RouterLink :to="{path:'/product/modify', query: { id: productObj.productNo }}">
                     <button type="button" class="btn btn-outline-primary" style="margin: 5px;">編輯</button></RouterLink>
